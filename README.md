@@ -4,6 +4,12 @@ Pulls your Notion client data and Google Calendar on a schedule via
 GitHub Actions, and publishes the command-deck dashboard as a static
 site on GitHub Pages.
 
+`.claude/skills/humanize/` and `.claude/skills/ai-check/` are vendored
+from [harshaneel/humanize](https://github.com/harshaneel/humanize) (MIT
+license, see each skill's `LICENSE`) — use them whenever copy (labels,
+empty-states, README text) is drafted for this repo, to keep it reading
+as human-written.
+
 **Heads up on privacy:** this is a public repo/Pages setup. Anyone with
 the URL can view the dashboard, including client names, task details,
 and check-in status. Contact emails are deliberately stripped from the

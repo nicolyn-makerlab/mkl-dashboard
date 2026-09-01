@@ -1,0 +1,34 @@
+[
+  {
+    "id": "meeting-recap-sync",
+    "name": "Meeting recap sync",
+    "status": "pending",
+    "lastRun": null,
+    "summary": "Hasn't run yet.",
+    "fix": ""
+  },
+  {
+    "id": "crm-builder",
+    "name": "Client CRM builder",
+    "status": "pending",
+    "lastRun": null,
+    "summary": "Hasn't run yet.",
+    "fix": ""
+  },
+  {
+    "id": "keep-it-running-watcher",
+    "name": "Keep-it-running watcher",
+    "status": "pending",
+    "lastRun": null,
+    "summary": "Hasn't run yet.",
+    "fix": ""
+  },
+  {
+    "id": "weekly-polish-pass",
+    "name": "Weekly polish pass",
+    "status": "pending",
+    "lastRun": null,
+    "summary": "Hasn't run yet.",
+    "fix": ""
+  }
+]

@@ -43,6 +43,22 @@ how much review to insist on:
 
 When in doubt, treat it as the bigger category.
 
+## Reporting routine status to the dashboard
+
+Every scheduled routine that runs against this repo must update its own
+entry in `routine-status.json` (repo root) when it finishes, so its
+result shows up as a colored dot on the dashboard itself:
+
+- Find the object with your routine's `id` and update it in place — don't
+  add duplicates or touch other routines' entries.
+- Set `status` to `"success"` or `"failure"`, `lastRun` to the current
+  UTC timestamp, and `summary` to **3 plain-language sentences at most**
+  saying what happened — no file names, code, or technical terms.
+- On failure, also fill in `fix`: one plain sentence on what needs to
+  happen next (e.g. "needs someone to renew the calendar login").
+- This file update is small and low-risk — commit and push it straight
+  to `main` per the merge policy above, don't open a PR just for it.
+
 ## What this repo is
 
 Maker Lab's internal client dashboard. Pulls client/task data from Notion

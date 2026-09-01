@@ -126,6 +126,26 @@ text-align: center;
 
 .empty-note { font-size: 13px; color: #777; }
 
+.automation-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  padding: 6px 0;
+  cursor: pointer;
+}
+.automation-time { font-size: 11px; color: #777; }
+.automation-detail {
+  display: none;
+  font-size: 12px;
+  color: #333;
+  background: #fff;
+  border-radius: 8px;
+  padding: 8px 10px;
+  margin: -2px 0 8px;
+}
+.automation-detail.open { display: block; }
+
 @media (max-width: 640px) {
   .stat-row, .two-col { grid-template-columns: 1fr; }
   .deck { padding: 20px; margin: 0; border-radius: 0; }

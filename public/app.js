@@ -36,6 +36,17 @@ function firstName(fullName) {
   return (fullName || "").split(" ")[0];
 }
 
+function routineDotClass(status) {
+  if (status === "success") return "flag-green";
+  if (status === "failure") return "flag-red";
+  return "flag-unlogged";
+}
+
+window.toggleRoutine = (id) => {
+  const el = document.getElementById(`routine-detail-${id}`);
+  if (el) el.classList.toggle("open");
+};
+
 async function fetchDashboardData(forceRefresh) {
   try {
     if (!forceRefresh) {
@@ -80,6 +91,21 @@ function render(deck, data) {
         .join("")
     : `<div class="empty-note">No client meetings matched on your calendar in the lookahead window.</div>`;
 
+  const routinesHtml = (data.routines || []).length
+    ? data.routines
+        .map(
+          (r) => `
+        <div class="automation-row" onclick="window.toggleRoutine('${r.id}')">
+          <span><span class="flag-dot ${routineDotClass(r.status)}"></span>${r.name}</span>
+          <span class="automation-time">${r.lastRun ? fmtDateTime(r.lastRun) : "never run"}</span>
+        </div>
+        <div class="automation-detail" id="routine-detail-${r.id}">
+          ${r.summary || ""}${r.status === "failure" && r.fix ? ` <b>Fix:</b> ${r.fix}` : ""}
+        </div>`
+        )
+        .join("")
+    : `<div class="empty-note">No automations logged yet.</div>`;
+
   const healthHtml = attention.length
     ? attention
         .map(
@@ -119,6 +145,10 @@ function render(deck, data) {
         <div class="panel-title">Client health</div>
         ${healthHtml}
       </div>
+    </div>
+    <div class="panel">
+      <div class="panel-title">Automations</div>
+      ${routinesHtml}
     </div>
   `;
 }

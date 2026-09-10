@@ -6,12 +6,12 @@ site on GitHub Pages.
 
 **Heads up on privacy:** this is a public repo/Pages setup. Anyone with
 the URL can view the dashboard, including client names, task details,
-and check-in status. Contact emails are deliberately stripped from the
-published data, and the page is marked `noindex` so search engines
-won't list it, but neither of those makes it actually private. Treat
-the URL itself as something to keep off public channels. If your
-GitHub org is later upgraded to Enterprise Cloud, ask Claude Code to
-switch this to access-controlled Pages instead.
+check-in status, and (as of the company page) contact email addresses.
+The page is marked `noindex` so search engines won't list it, but that
+doesn't make it actually private. Treat the URL itself as something to
+keep off public channels. If your GitHub org is later upgraded to
+Enterprise Cloud, ask Claude Code to switch this to access-controlled
+Pages instead.
 
 As before, the fastest way to get this running is to hand the folder
 to Claude Code and say: **"push this to a new GitHub repo, set up the
@@ -82,7 +82,7 @@ Your dashboard URL will be `https://<your-username>.github.io/<your-repo>/`, sho
 - **Tasks due this week**: `lib/dashboard-data.js` — Owner = `TASK_OWNER_NAME`, Status not Done, due within `TASK_LOOKAHEAD_DAYS`, sorted by date then client then task. Companies in `EXCLUDE_COMPANIES` are filtered out.
 - **Next client touchpoints**: calendar attendee emails matched against Clients CRM contact emails, within `MEETING_LOOKAHEAD_DAYS`. Video link = call, physical location = face to face.
 - **Client health**: per contact, using `LAST_CONTACT_YELLOW_DAYS` / `LAST_CONTACT_RED_DAYS`. No date logged shows as a distinct "unlogged" state.
-- **Company lookup**: dropdown near the top of the dashboard, listing every company from Notion except anything with "MKL" in the name (Maker Lab's own internal entries, never real clients). Selecting one shows its contacts with their last known contact date. Built in `lib/dashboard-data.js` (the `companies` field) and rendered in `public/app.js`.
+- **Company lookup**: dropdown near the top of the dashboard, listing every company from Notion except anything with "MKL" in the name (Maker Lab's own internal entries, never real clients). Selecting one goes to that company's own page (`company.html`), showing its contacts (name, email, last known contact date) and its open tasks (with description and due date, pulled from Notion). Built in `lib/dashboard-data.js` (the `companies` field) and rendered in `public/app.js` / `public/company.js`. Company names in the tasks table, touchpoints, and client health list also link to this page.
 
 ### Granola executive summaries — deliberately left out for now
 Adding a per-company executive summary pulled from the last 3 Granola conversations was considered, but paused: Granola's meeting notes contain things like overdue invoices, salary/rate details, and contract renewal risk, and this dashboard is a public GitHub Pages site. Publishing that content as-is would put sensitive information on a public URL. Ask Claude Code to build this once you've decided how it should be handled (kept private/local-only, redacted before publishing, or the site moved to access-controlled Pages).

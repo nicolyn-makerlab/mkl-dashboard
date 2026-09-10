@@ -11,23 +11,31 @@ function fmtContactDate(iso) {
 function renderTasks(tasks) {
   if (!tasks.length) return `<div class="empty-note">No open tasks for this company.</div>`;
   return `
-    <table class="task-table">
-      <tr><th>Date</th><th>Task</th><th>Owner</th><th>Status</th></tr>
-      ${tasks
-        .map(
-          (t) =>
-            `<tr><td>${t.dueDate ? fmtDate(t.dueDate) : "No due date"}</td><td>${t.name}</td><td>${t.owner || ""}</td><td>${t.status || ""}</td></tr>`
-        )
-        .join("")}
-    </table>`;
+    <div class="table-scroll">
+      <table class="task-table task-table-wide">
+        <colgroup>
+          <col style="width:100px"><col style="width:160px"><col style="min-width:220px"><col style="width:100px"><col style="width:100px">
+        </colgroup>
+        <tr><th>Due Date</th><th>Task</th><th>Description</th><th>Owner</th><th>Status</th></tr>
+        ${tasks
+          .map(
+            (t) =>
+              `<tr><td>${t.dueDate ? fmtDate(t.dueDate) : "No due date"}</td><td>${t.name}</td><td class="wrap-cell">${t.description || ""}</td><td>${t.owner || ""}</td><td>${t.status || ""}</td></tr>`
+          )
+          .join("")}
+      </table>
+    </div>`;
 }
 
 function renderContacts(contacts) {
   if (!contacts.length) return `<div class="empty-note">No contacts logged for this company yet.</div>`;
   return contacts
     .map(
-      (ct) =>
-        `<div class="contact-line"><span>${ct.name || "Unnamed contact"}</span><span class="contact-date">${fmtContactDate(ct.lastContact)}</span></div>`
+      (ct) => `
+        <div class="contact-line">
+          <span>${ct.name || "Unnamed contact"}${ct.email ? ` <span class="contact-email">${ct.email}</span>` : ""}</span>
+          <span class="contact-date">${fmtContactDate(ct.lastContact)}</span>
+        </div>`
     )
     .join("");
 }
@@ -38,20 +46,20 @@ function render(deck, company) {
     <div class="deck-header">
       <div>
         <div class="eyebrow"><a href="index.html" class="back-link">&larr; Back to dashboard</a></div>
-        <div class="headline">${company.name}</div>
+        <div class="company-title">${company.name}</div>
       </div>
     </div>
     <div class="stat-row">
-      <div class="stat-card"><div class="stat-num" style="color:var(--ml-gray-text)">TBC</div><div class="stat-label">number of talent</div></div>
-      <div class="stat-card"><div class="stat-num" style="color:var(--ml-gray-text)">TBC</div><div class="stat-label">next scheduled quarterly review</div></div>
-      <div class="stat-card"><div class="stat-num" style="color:var(--ml-gray-text)">TBC</div><div class="stat-label">&nbsp;</div></div>
+      <div class="stat-card"><div class="stat-num">TBC</div><div class="stat-label">number of talent</div></div>
+      <div class="stat-card"><div class="stat-num">TBC</div><div class="stat-label">next scheduled quarterly review</div></div>
+      <div class="stat-card"><div class="stat-num">TBC</div><div class="stat-label">&nbsp;</div></div>
     </div>
     <div class="panel">
       <div class="panel-title">Team pulse</div>
       <div class="empty-note">Coming soon &mdash; a summary of team pulse based on talent conversations. Source not decided yet.</div>
     </div>
     <div class="panel">
-      <div class="panel-title">Tasks (from Notion)</div>
+      <div class="panel-title">Tasks</div>
       ${renderTasks(company.tasks || [])}
     </div>
     <div class="panel">

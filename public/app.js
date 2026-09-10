@@ -37,11 +37,14 @@ function firstName(fullName) {
 }
 
 async function fetchDashboardData(forceRefresh) {
+  // On the published static site there's no live API - "refresh" just
+  // re-fetches this file (cache: "no-store" means it's never stale).
+  // /api/dashboard only exists when running the local dev server
+  // (server.js), and is used purely as a fallback for that case, e.g.
+  // before the static file has ever been built locally.
   try {
-    if (!forceRefresh) {
-      const res = await fetch("dashboard-data.json", { cache: "no-store" });
-      if (res.ok) return res.json();
-    }
+    const res = await fetch("dashboard-data.json", { cache: "no-store" });
+    if (res.ok) return res.json();
   } catch (_) {}
   const res = await fetch(`/api/dashboard${forceRefresh ? "?refresh=1" : ""}`);
   return res.json();

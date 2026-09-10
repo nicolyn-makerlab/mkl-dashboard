@@ -131,6 +131,7 @@ text-align: center;
 
 .stat-num { font-size: 26px; font-weight: 700; color: var(--ml-lime); }
 .stat-label { font-size: 12px; color: var(--ml-gray-text); margin-top: 2px; }
+.stat-label::first-letter { text-transform: uppercase; }
 
 .panel {
   background: var(--ml-panel);

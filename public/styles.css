@@ -147,7 +147,7 @@ text-align: center;
 .contact-line:first-of-type { border-top: none; }
 .contact-date { color: #777; font-size: 12px; }
 
-.company-link { color: inherit; text-decoration: underline; text-decoration-color: #aaa; }
+.company-link { color: inherit; font-weight: 700; text-decoration: underline; text-decoration-color: #aaa; }
 .company-link:hover { color: var(--ml-blue); }
 
 .back-link { color: var(--ml-gray-text); text-decoration: none; }

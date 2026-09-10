@@ -58,27 +58,21 @@ async function fetchDashboardData(forceRefresh) {
   return res.json();
 }
 
-let dashboardData = null;
-
-function fmtContactDate(iso) {
-  return iso ? fmtDate(iso) : "no last-contact logged";
-}
-
-function renderCompanyDetail(company) {
-  const rows = company.contacts.length
-    ? company.contacts
-        .map((ct) => `<div class="contact-line"><span>${ct.name || "Unnamed contact"}</span><span class="contact-date">${fmtContactDate(ct.lastContact)}</span></div>`)
-        .join("")
-    : `<div class="empty-note">No contacts logged for this company yet.</div>`;
-  return `<div class="company-detail-title">${company.name} &mdash; contacts</div>${rows}`;
-}
-
 window.onCompanySelect = (companyId) => {
-  const detail = document.getElementById("company-detail");
-  if (!detail) return;
-  const company = (dashboardData && dashboardData.companies || []).find((c) => c.id === companyId);
-  detail.innerHTML = company ? renderCompanyDetail(company) : "";
+  if (!companyId) return;
+  window.location.href = `company.html?id=${encodeURIComponent(companyId)}`;
 };
+
+function buildCompanyIndex(data) {
+  const byName = {};
+  for (const c of data.companies || []) byName[c.name] = c.id;
+  return byName;
+}
+
+function companyLink(name, companyIndex) {
+  const id = companyIndex[name];
+  return id ? `<a href="company.html?id=${encodeURIComponent(id)}" class="company-link">${name}</a>` : name;
+}
 
 async function load(forceRefresh) {
   const deck = document.getElementById("deck");
@@ -93,14 +87,14 @@ async function load(forceRefresh) {
 window.refreshDashboard = () => load(true);
 
 function render(deck, data) {
-  dashboardData = data;
+  const companyIndex = buildCompanyIndex(data);
   const totalTouchpoints = data.touchpoints.length;
   const companiesWithTouchpoints = new Set(data.touchpoints.flatMap((t) => t.attendees.map((a) => a.companyName))).size;
   const unlogged = data.health.filter((h) => h.flag === "unlogged").length;
   const attention = data.health.filter((h) => h.flag === "red" || h.flag === "yellow");
 
   const taskRows = data.tasks.length
-    ? data.tasks.map((t) => `<tr><td>${fmtDate(t.dueDate)}</td><td>${t.companyName}</td><td>${t.name}</td><td>${t.owner}</td><td>${t.status}</td></tr>`).join("")
+    ? data.tasks.map((t) => `<tr><td>${fmtDate(t.dueDate)}</td><td>${companyLink(t.companyName, companyIndex)}</td><td>${t.name}</td><td>${t.owner}</td><td>${t.status}</td></tr>`).join("")
     : `<tr><td colspan="5" class="empty-note">Nothing due this week. Good spot to be in.</td></tr>`;
 
   const touchpointHtml = data.calendarError
@@ -108,7 +102,7 @@ function render(deck, data) {
     : data.touchpoints.length
     ? data.touchpoints
         .map((t) => {
-          const names = t.attendees.map((a) => `${firstName(a.contactName)} (${a.companyName})`).join(", ");
+          const names = t.attendees.map((a) => `${firstName(a.contactName)} (${companyLink(a.companyName, companyIndex)})`).join(", ");
           return `<div class="touchpoint-row"><span class="icon">${meetingIcon(t.meetingType)}</span>${fmtDateTime(t.start)} &mdash; ${names}</div>`;
         })
         .join("")
@@ -133,7 +127,7 @@ function render(deck, data) {
     ? attention
         .map(
           (h) =>
-            `<div class="health-line"><span class="flag-dot flag-${h.flag}"></span>${h.contactName}, <b>${h.companyName}</b> &mdash; ${flagLabel(h.flag)}</div>`
+            `<div class="health-line"><span class="flag-dot flag-${h.flag}"></span>${h.contactName}, <b>${companyLink(h.companyName, companyIndex)}</b> &mdash; ${flagLabel(h.flag)}</div>`
         )
         .join("")
     : `<div class="empty-note">No contacts are overdue for a check-in.</div>`;
@@ -153,7 +147,6 @@ function render(deck, data) {
         <option value="">Select a company&hellip;</option>
         ${(data.companies || []).map((c) => `<option value="${c.id}">${c.name}</option>`).join("")}
       </select>
-      <div id="company-detail"></div>
     </div>
     <div class="stat-row">
       <div class="stat-card"><div class="stat-num" style="color:var(--ml-lime)">${data.tasks.length}</div><div class="stat-label">tasks due this week</div></div>

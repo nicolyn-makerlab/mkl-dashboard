@@ -10,13 +10,13 @@ function renderRoster(roster) {
     <div class="table-scroll">
       <table class="task-table task-table-wide">
         <colgroup>
-          <col style="width:160px"><col><col style="width:120px"><col style="width:120px">
+          <col style="width:160px"><col><col style="width:120px"><col style="width:120px"><col style="width:140px">
         </colgroup>
-        <tr><th>Name</th><th>Role</th><th>Started</th><th>Contract Length</th></tr>
+        <tr><th>Name</th><th>Role</th><th>Started</th><th>Contract Length</th><th>Currently Contracted To</th></tr>
         ${roster
           .map(
             (t) =>
-              `<tr><td>${t.name || ""}</td><td class="wrap-cell">${t.role || ""}</td><td>${t.started ? fmtDate(t.started) : ""}</td><td>${t.contractLength || ""}</td></tr>`
+              `<tr><td>${t.name || ""}</td><td class="wrap-cell">${t.role || ""}</td><td>${t.started ? fmtDate(t.started) : ""}</td><td>${t.contractLength || ""}</td><td>${t.contractedTo ? fmtDate(t.contractedTo) : ""}</td></tr>`
           )
           .join("")}
       </table>

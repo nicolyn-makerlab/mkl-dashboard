@@ -47,11 +47,6 @@ async function fetchDashboardData(forceRefresh) {
   return res.json();
 }
 
-window.onCompanySelect = (companyId) => {
-  if (!companyId) return;
-  window.location.href = `company.html?id=${encodeURIComponent(companyId)}`;
-};
-
 function buildCompanyIndex(data) {
   const byName = {};
   for (const c of data.companies || []) byName[c.name] = c.id;
@@ -109,23 +104,19 @@ function render(deck, data) {
   deck.innerHTML = `
     <div class="logo-wrap"><img src="logo.jpg" alt="Maker Lab" /></div>
     <div class="deck-header">
-      <div>
-        <div class="eyebrow">${new Date(data.generatedAt).toLocaleString(undefined, { weekday: "short", month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })}</div>
-        <div class="headline">${singaporeGreeting()}</div>
+      <div class="header-left">
+        ${renderHamburgerNav(data.companies)}
+        <div>
+          <div class="eyebrow">${new Date(data.generatedAt).toLocaleString(undefined, { weekday: "short", month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })}</div>
+          <div class="headline">${singaporeGreeting()}</div>
+        </div>
       </div>
-      <button onclick="window.refreshDashboard()" style="background:#151515;color:var(--ml-lime);border:1px solid #333;border-radius:8px;padding:8px 14px;font-size:12px;cursor:pointer">&#8635; Refresh</button>
+      <button class="refresh-btn" onclick="window.refreshDashboard()" aria-label="Refresh">&#8635;</button>
     </div>
     <div class="stat-row">
       <div class="stat-card"><div class="stat-num">${data.tasks.length}</div><div class="stat-label">tasks due this week</div></div>
       <div class="stat-card"><div class="stat-num">${totalTouchpoints}</div><div class="stat-label">meetings scheduled, ${companiesWithTouchpoints} client${companiesWithTouchpoints === 1 ? "" : "s"}</div></div>
       <div class="stat-card"><div class="stat-num">${unlogged}</div><div class="stat-label">contacts with no last-contact logged</div></div>
-    </div>
-    <div class="panel">
-      <div class="panel-title">Company lookup</div>
-      <select id="company-select" onchange="window.onCompanySelect(this.value)">
-        <option value="">Select a company&hellip;</option>
-        ${(data.companies || []).map((c) => `<option value="${c.id}">${c.name}</option>`).join("")}
-      </select>
     </div>
     <div class="panel">
       <div class="panel-title">Tasks due this week</div>

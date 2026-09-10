@@ -4,17 +4,13 @@ function fmtDate(iso) {
   return d.toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" });
 }
 
-function fmtContactDate(iso) {
-  return iso ? fmtDate(iso) : "no last-contact logged";
-}
-
 function renderTasks(tasks) {
   if (!tasks.length) return `<div class="empty-note">No open tasks for this company.</div>`;
   return `
     <div class="table-scroll">
       <table class="task-table task-table-wide">
         <colgroup>
-          <col style="width:100px"><col style="width:160px"><col style="min-width:220px"><col style="width:100px"><col style="width:100px">
+          <col style="width:100px"><col style="width:240px"><col><col style="width:100px"><col style="width:100px">
         </colgroup>
         <tr><th>Due Date</th><th>Task</th><th>Description</th><th>Owner</th><th>Status</th></tr>
         ${tasks
@@ -27,26 +23,34 @@ function renderTasks(tasks) {
     </div>`;
 }
 
-function renderContacts(contacts) {
-  if (!contacts.length) return `<div class="empty-note">No contacts logged for this company yet.</div>`;
-  return contacts
-    .map(
-      (ct) => `
-        <div class="contact-line">
-          <span>${ct.name || "Unnamed contact"}${ct.email ? ` <span class="contact-email">${ct.email}</span>` : ""}</span>
-          <span class="contact-date">${fmtContactDate(ct.lastContact)}</span>
-        </div>`
-    )
-    .join("");
+function gmailComposeUrl(email) {
+  return `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}`;
 }
 
-function render(deck, company) {
+function renderContacts(contacts) {
+  if (!contacts.length) return `<div class="empty-note">No contacts logged for this company yet.</div>`;
+  return `
+    <table class="task-table">
+      <tr><th>Name</th><th>Email</th><th>Title</th></tr>
+      ${contacts
+        .map(
+          (ct) =>
+            `<tr><td>${ct.name || "Unnamed contact"}</td><td>${ct.email ? `<a href="${gmailComposeUrl(ct.email)}" target="_blank" rel="noopener" class="email-link">${ct.email}</a>` : ""}</td><td>${ct.title || ""}</td></tr>`
+        )
+        .join("")}
+    </table>`;
+}
+
+function render(deck, company, allCompanies) {
   deck.innerHTML = `
     <div class="logo-wrap"><img src="logo.jpg" alt="Maker Lab" /></div>
     <div class="deck-header">
-      <div>
-        <div class="eyebrow"><a href="index.html" class="back-link">&larr; Back to dashboard</a></div>
-        <div class="company-title">${company.name}</div>
+      <div class="header-left">
+        ${renderHamburgerNav(allCompanies)}
+        <div>
+          <div class="eyebrow"><a href="index.html" class="back-link">&larr; Back to dashboard</a></div>
+          <div class="company-title">${company.name}</div>
+        </div>
       </div>
     </div>
     <div class="stat-row">
@@ -91,7 +95,7 @@ async function load() {
       deck.innerHTML = `<div class="loading">Company not found. <a href="index.html" style="color:var(--ml-lime)">Back to dashboard</a></div>`;
       return;
     }
-    render(deck, company);
+    render(deck, company, data.companies || []);
   } catch (err) {
     deck.innerHTML = `<div class="loading">Couldn't load company data: ${err.message}</div>`;
   }

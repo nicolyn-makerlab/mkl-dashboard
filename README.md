@@ -23,8 +23,8 @@ Pages workflow, and walk me through adding the secrets."**
 1. Create an integration at https://www.notion.so/my-integrations, copy its secret.
 2. In Notion, share your "Companies & Clients CRM" page and the Tasks database with it (`...` menu → Connections).
 
-### 2. Google Calendar + Sheets OAuth (local step, needed once)
-1. In https://console.cloud.google.com: enable the **Calendar API** and the **Sheets API**, create an OAuth **Desktop app** client, download the JSON as `google-credentials.json` in this folder.
+### 2. Google Calendar + Sheets + Chat OAuth (local step, needed once)
+1. In https://console.cloud.google.com: enable the **Calendar API**, the **Sheets API**, and the **Chat API**, create an OAuth **Desktop app** client, download the JSON as `google-credentials.json` in this folder.
 2. Run:
    ```bash
    npm install
@@ -32,7 +32,13 @@ Pages workflow, and walk me through adding the secrets."**
    ```
 3. This prints `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, and `GOOGLE_REFRESH_TOKEN` — copy these, you'll need them in step 4.
 
-If you'd already done this setup before "number of talent" was added, you need to redo this step - the refresh token from before only covers Calendar, not Sheets, and Google won't let a token grow new permissions after the fact. Re-running `npm run auth` gives you a fresh `GOOGLE_REFRESH_TOKEN` covering both; update the GitHub secret with the new value.
+If you'd already done this setup before "number of talent" or Chat were added, you need to redo this step - a refresh token only covers the scopes it was issued with, and Google won't let it grow new permissions after the fact. Re-running `npm run auth` gives you a fresh `GOOGLE_REFRESH_TOKEN` covering everything currently in `SCOPES`; update the GitHub secret with the new value.
+
+**Chat access specifically may need one more thing.** Google treats Chat's read scopes as more sensitive than Calendar/Sheets. Before running `npm run auth`:
+- Check your OAuth consent screen's user type (Cloud Console → APIs & Services → OAuth consent screen). If it's set to **Internal** (restricted to your Workspace), you're fine. If it's **External**, Google's verification review for these scopes can take weeks.
+- If, after approving access in the browser, the connection still fails with something like "administrator has restricted this app" or "access blocked," that's your Workspace admin's API controls (Admin console → Security → API controls) blocking it — an admin needs to allowlist the app, not something fixable from this repo.
+
+Once `npm run auth` succeeds, run `npm run chat-check` to confirm the Chat connection actually works — it lists the spaces/DMs it can see without touching the real dashboard build. Report back what it prints (or any error) before wiring Chat data into the dashboard itself.
 
 ### 3. Push to GitHub
 ```bash

@@ -45,6 +45,12 @@ When in doubt, treat it as the bigger category.
 
 ## Reporting routine status to the dashboard
 
+**Note:** the Automations panel that displayed this on the dashboard
+itself was removed (design cleanup, September 2026). Keep writing to
+`routine-status.json` as below regardless — nothing else currently
+reads it, but re-adding a visible panel for it later is cheap, and
+losing the run history isn't.
+
 Every scheduled routine that runs against this repo must update its own
 entry in `routine-status.json` (repo root) when it finishes, so its
 result shows up as a colored dot on the dashboard itself:

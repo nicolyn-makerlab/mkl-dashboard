@@ -105,7 +105,7 @@ Your dashboard URL will be `https://<your-username>.github.io/<your-repo>/`, sho
   - Marriott and Warner Music aren't in this spreadsheet at all, so they show `0` — that's "not tracked here," not a confirmed zero.
   - If the sheet can't be reached (auth not set up yet, access revoked, tab renamed), the number shows as "TBC" instead of a wrong number.
 
-### Last five company topics (Google Chat)
+### Key Chats (Google Chat)
 Each company page can show a short, AI-generated list of recent discussion topics from that client's Google Chat spaces (`lib/chat-summary.js`) — topics only, never verbatim quotes, dollar amounts, or personal details, since this dashboard is public. This runs on its own schedule (`.github/workflows/refresh-chat-summaries.yml`, twice a day) rather than the main 30-min refresh, because it calls the Anthropic API, which costs per run — decoupling it keeps that cost low regardless of how often the rest of the dashboard refreshes. It writes `chat-summary-cache.json` at the repo root and commits it straight back to `main` automatically (so `main` will get small auto-commits twice a day from this) — `lib/build.js` just reads that file on every regular refresh, no extra API calls.
 
 Which Chat space feeds which company is a manual list in `lib/chat-summary.js` (`COMPANY_SPACES`) — space names don't reliably match company names, so this isn't auto-matched. Currently mapped: STB, Trade Desk, KFC, Grab, Workday, Google, AirWallex. Ask Claude Code to add a company once its Chat space is clear from `npm run chat-check`.

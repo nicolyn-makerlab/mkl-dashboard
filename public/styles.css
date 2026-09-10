@@ -58,7 +58,7 @@ body {
   margin-bottom: 12px;
 }
 
-.headline, .company-title { font-size: 28.6px; font-weight: 700; }
+.headline, .company-title { font-size: 34px; font-weight: 700; }
 
 .stat-row {
   display: grid;

@@ -36,17 +36,6 @@ function firstName(fullName) {
   return (fullName || "").split(" ")[0];
 }
 
-function routineDotClass(status) {
-  if (status === "success") return "flag-green";
-  if (status === "failure") return "flag-red";
-  return "flag-unlogged";
-}
-
-window.toggleRoutine = (id) => {
-  const el = document.getElementById(`routine-detail-${id}`);
-  if (el) el.classList.toggle("open");
-};
-
 async function fetchDashboardData(forceRefresh) {
   try {
     if (!forceRefresh) {
@@ -108,21 +97,6 @@ function render(deck, data) {
         .join("")
     : `<div class="empty-note">No client meetings matched on your calendar in the lookahead window.</div>`;
 
-  const routinesHtml = (data.routines || []).length
-    ? data.routines
-        .map(
-          (r) => `
-        <div class="automation-row" onclick="window.toggleRoutine('${r.id}')">
-          <span><span class="flag-dot ${routineDotClass(r.status)}"></span>${r.name}</span>
-          <span class="automation-time">${r.lastRun ? fmtDateTime(r.lastRun) : "never run"}</span>
-        </div>
-        <div class="automation-detail" id="routine-detail-${r.id}">
-          ${r.summary || ""}${r.status === "failure" && r.fix ? ` <b>Fix:</b> ${r.fix}` : ""}
-        </div>`
-        )
-        .join("")
-    : `<div class="empty-note">No automations logged yet.</div>`;
-
   const healthHtml = attention.length
     ? attention
         .map(
@@ -139,7 +113,7 @@ function render(deck, data) {
         <div class="eyebrow">${new Date(data.generatedAt).toLocaleString(undefined, { weekday: "short", month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })}</div>
         <div class="headline">${singaporeGreeting()}</div>
       </div>
-      <button onclick="window.refreshDashboard()" style="background:#151515;color:#CFFF3D;border:1px solid #333;border-radius:8px;padding:8px 14px;font-size:12px;cursor:pointer">&#8635; Refresh</button>
+      <button onclick="window.refreshDashboard()" style="background:#151515;color:var(--ml-lime);border:1px solid #333;border-radius:8px;padding:8px 14px;font-size:12px;cursor:pointer">&#8635; Refresh</button>
     </div>
     <div class="panel">
       <div class="panel-title">Company lookup</div>
@@ -149,9 +123,9 @@ function render(deck, data) {
       </select>
     </div>
     <div class="stat-row">
-      <div class="stat-card"><div class="stat-num" style="color:var(--ml-lime)">${data.tasks.length}</div><div class="stat-label">tasks due this week</div></div>
-      <div class="stat-card"><div class="stat-num" style="color:var(--ml-blue-bright)">${totalTouchpoints}</div><div class="stat-label">meetings scheduled, ${companiesWithTouchpoints} client${companiesWithTouchpoints === 1 ? "" : "s"}</div></div>
-      <div class="stat-card"><div class="stat-num" style="color:var(--ml-gray-text)">${unlogged}</div><div class="stat-label">contacts with no last-contact logged</div></div>
+      <div class="stat-card"><div class="stat-num">${data.tasks.length}</div><div class="stat-label">tasks due this week</div></div>
+      <div class="stat-card"><div class="stat-num">${totalTouchpoints}</div><div class="stat-label">meetings scheduled, ${companiesWithTouchpoints} client${companiesWithTouchpoints === 1 ? "" : "s"}</div></div>
+      <div class="stat-card"><div class="stat-num">${unlogged}</div><div class="stat-label">contacts with no last-contact logged</div></div>
     </div>
     <div class="panel">
       <div class="panel-title">Tasks due this week</div>
@@ -169,10 +143,6 @@ function render(deck, data) {
         <div class="panel-title">Client health</div>
         ${healthHtml}
       </div>
-    </div>
-    <div class="panel">
-      <div class="panel-title">Automations</div>
-      ${routinesHtml}
     </div>
   `;
 }

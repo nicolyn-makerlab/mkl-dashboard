@@ -1,9 +1,9 @@
 :root {
   --ml-black: #0A0A0A;
   --ml-card: #151515;
-  --ml-lime: #CFFF3D;
-  --ml-blue: #1E4FE0;
-  --ml-blue-bright: #4C7CF0;
+  --ml-lime: #D6FE00;
+  --ml-blue: #1851D7;
+  --ml-blue-bright: #4C79E8;
   --ml-gray-text: #9A9A9A;
   --ml-panel: #F3F2EE;
   --ml-panel-border: #E1E0DA;
@@ -55,10 +55,10 @@ body {
   letter-spacing: 0.08em;
   color: var(--ml-gray-text);
   text-transform: uppercase;
-  margin-bottom: 6px;
+  margin-bottom: 12px;
 }
 
-.headline { font-size: 22px; font-weight: 700; }
+.headline, .company-title { font-size: 28.6px; font-weight: 700; }
 
 .stat-row {
   display: grid;
@@ -69,12 +69,13 @@ body {
 
 .stat-card {
   background: var(--ml-card);
+  border: 1px solid var(--ml-lime);
   border-radius: 10px;
   padding: 14px;
 text-align: center;
 }
 
-.stat-num { font-size: 26px; font-weight: 700; }
+.stat-num { font-size: 26px; font-weight: 700; color: var(--ml-lime); }
 .stat-label { font-size: 12px; color: var(--ml-gray-text); margin-top: 2px; }
 
 .panel {
@@ -153,25 +154,11 @@ text-align: center;
 .back-link { color: var(--ml-gray-text); text-decoration: none; }
 .back-link:hover { color: var(--ml-lime); }
 
-.automation-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 13px;
-  padding: 6px 0;
-  cursor: pointer;
-}
-.automation-time { font-size: 11px; color: #777; }
-.automation-detail {
-  display: none;
-  font-size: 12px;
-  color: #333;
-  background: #fff;
-  border-radius: 8px;
-  padding: 8px 10px;
-  margin: -2px 0 8px;
-}
-.automation-detail.open { display: block; }
+.table-scroll { overflow-x: auto; }
+.task-table-wide { table-layout: fixed; min-width: 640px; }
+.wrap-cell { white-space: normal; word-break: break-word; }
+
+.contact-email { color: #777; font-size: 12px; margin-left: 6px; }
 
 @media (max-width: 640px) {
   .stat-row, .two-col { grid-template-columns: 1fr; }

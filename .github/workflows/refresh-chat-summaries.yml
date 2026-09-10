@@ -1,0 +1,43 @@
+name: Refresh chat topic summaries
+
+# Deliberately separate from refresh-and-deploy.yml. Summarizing Chat
+# messages calls the Anthropic API, which has a real per-call cost, so
+# this runs on its own twice-a-day schedule instead of every 30 minutes.
+# It commits chat-summary-cache.json back to main; the regular dashboard
+# build just reads that file, no extra API calls on every refresh.
+on:
+  schedule:
+    # ~9am and ~5pm SGT (UTC+8) = 01:00 and 09:00 UTC
+    - cron: "0 1,9 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  summarize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - run: npm ci
+
+      - name: Summarize recent chat topics
+        run: node lib/chat-summary.js
+        env:
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+
+      - name: Commit updated cache
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add chat-summary-cache.json
+          git diff --staged --quiet || git commit -m "Refresh chat topic summaries"
+          git push

@@ -78,6 +78,11 @@ Variables (same page, **Variables** tab — these aren't secret, just config):
 
 The Google account you authorized in step 2 also needs at least Viewer access to that talent spreadsheet, same as any other Google Sheet you'd share.
 
+For the Chat topic summaries (see below), add one more secret:
+| Name | Value |
+|---|---|
+| `ANTHROPIC_API_KEY` | an API key from https://console.anthropic.com (separate from your Claude subscription — this is metered, pay-as-you-go usage) |
+
 ### 5. Enable Pages
 **Settings → Pages → Build and deployment → Source: GitHub Actions**
 
@@ -99,6 +104,13 @@ Your dashboard URL will be `https://<your-username>.github.io/<your-repo>/`, sho
   - "Airwallex" and "Singapore Tourism Board" in the sheet are matched to "AirWallex" and "STB" in Notion. "YouTube" is tracked separately in the sheet and is deliberately left out of Google's count for now.
   - Marriott and Warner Music aren't in this spreadsheet at all, so they show `0` — that's "not tracked here," not a confirmed zero.
   - If the sheet can't be reached (auth not set up yet, access revoked, tab renamed), the number shows as "TBC" instead of a wrong number.
+
+### Last five company topics (Google Chat)
+Each company page can show a short, AI-generated list of recent discussion topics from that client's Google Chat spaces (`lib/chat-summary.js`) — topics only, never verbatim quotes, dollar amounts, or personal details, since this dashboard is public. This runs on its own schedule (`.github/workflows/refresh-chat-summaries.yml`, twice a day) rather than the main 30-min refresh, because it calls the Anthropic API, which costs per run — decoupling it keeps that cost low regardless of how often the rest of the dashboard refreshes. It writes `chat-summary-cache.json` at the repo root and commits it straight back to `main` automatically (so `main` will get small auto-commits twice a day from this) — `lib/build.js` just reads that file on every regular refresh, no extra API calls.
+
+Which Chat space feeds which company is a manual list in `lib/chat-summary.js` (`COMPANY_SPACES`) — space names don't reliably match company names, so this isn't auto-matched. Currently mapped: STB, Trade Desk, KFC, Grab, Workday, Google, AirWallex. Ask Claude Code to add a company once its Chat space is clear from `npm run chat-check`.
+
+A company with no mapped space shows "Not connected for this company yet" rather than nothing, so it's clear that's a setup gap, not a bug.
 
 ### Granola executive summaries — deliberately left out for now
 Adding a per-company executive summary pulled from the last 3 Granola conversations was considered, but paused: Granola's meeting notes contain things like overdue invoices, salary/rate details, and contract renewal risk, and this dashboard is a public GitHub Pages site. Publishing that content as-is would put sensitive information on a public URL. Ask Claude Code to build this once you've decided how it should be handled (kept private/local-only, redacted before publishing, or the site moved to access-controlled Pages).

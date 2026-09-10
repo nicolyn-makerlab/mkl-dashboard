@@ -69,6 +69,10 @@ function render(deck, company, allCompanies) {
       <div class="stat-card"><div class="stat-num">TBC</div><div class="stat-label">&nbsp;</div></div>
     </div>
     <div class="panel">
+      <div class="panel-title">Executive Summary</div>
+      <div class="empty-note">Coming soon &mdash; on hold pending a decision on how to handle sensitive meeting content on a public dashboard.</div>
+    </div>
+    <div class="panel">
       <div class="panel-title">Key Chats</div>
       ${renderChatTopics(company.chatTopics)}
     </div>
@@ -79,10 +83,6 @@ function render(deck, company, allCompanies) {
     <div class="panel">
       <div class="panel-title">Team pulse</div>
       <div class="empty-note">Coming soon &mdash; a summary of team pulse based on talent conversations. Source not decided yet.</div>
-    </div>
-    <div class="panel">
-      <div class="panel-title">Granola executive summary (last 4 weeks)</div>
-      <div class="empty-note">Coming soon &mdash; on hold pending a decision on how to handle sensitive meeting content on a public dashboard.</div>
     </div>
     <div class="panel">
       <div class="panel-title">Clients</div>

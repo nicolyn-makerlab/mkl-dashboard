@@ -51,7 +51,7 @@ body {
   margin-bottom: 22px;
 }
 
-.header-left { display: flex; align-items: center; gap: 14px; }
+.header-left { display: flex; align-items: flex-start; gap: 26px; }
 
 .refresh-btn {
   background: #151515;

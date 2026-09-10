@@ -23,14 +23,16 @@ Pages workflow, and walk me through adding the secrets."**
 1. Create an integration at https://www.notion.so/my-integrations, copy its secret.
 2. In Notion, share your "Companies & Clients CRM" page and the Tasks database with it (`...` menu → Connections).
 
-### 2. Google Calendar OAuth (local step, needed once)
-1. In https://console.cloud.google.com: enable the Calendar API, create an OAuth **Desktop app** client, download the JSON as `google-credentials.json` in this folder.
+### 2. Google Calendar + Sheets OAuth (local step, needed once)
+1. In https://console.cloud.google.com: enable the **Calendar API** and the **Sheets API**, create an OAuth **Desktop app** client, download the JSON as `google-credentials.json` in this folder.
 2. Run:
    ```bash
    npm install
    npm run auth
    ```
 3. This prints `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, and `GOOGLE_REFRESH_TOKEN` — copy these, you'll need them in step 4.
+
+If you'd already done this setup before "number of talent" was added, you need to redo this step - the refresh token from before only covers Calendar, not Sheets, and Google won't let a token grow new permissions after the fact. Re-running `npm run auth` gives you a fresh `GOOGLE_REFRESH_TOKEN` covering both; update the GitHub secret with the new value.
 
 ### 3. Push to GitHub
 ```bash
@@ -66,6 +68,9 @@ Variables (same page, **Variables** tab — these aren't secret, just config):
 | `MEETING_LOOKAHEAD_DAYS` | `14` |
 | `LAST_CONTACT_YELLOW_DAYS` | `14` |
 | `LAST_CONTACT_RED_DAYS` | `30` |
+| `GOOGLE_TALENT_SHEET_ID` | `1wAot7_LKf-oHhZNKYLhWcXBXL6MxjzzaQ7GjBbzPj74` |
+
+The Google account you authorized in step 2 also needs at least Viewer access to that talent spreadsheet, same as any other Google Sheet you'd share.
 
 ### 5. Enable Pages
 **Settings → Pages → Build and deployment → Source: GitHub Actions**
@@ -76,13 +81,18 @@ Variables (same page, **Variables** tab — these aren't secret, just config):
 Your dashboard URL will be `https://<your-username>.github.io/<your-repo>/`, shown in the Actions run summary and in Settings → Pages.
 
 ## Local dev (optional)
-`npm start` still runs the old live Express server on localhost if you want to iterate on layout/logic before pushing — it hits Notion/Calendar directly rather than reading the static JSON.
+`npm start` still runs the old live Express server on localhost if you want to iterate on layout/logic before pushing — it hits Notion/Calendar/Sheets directly rather than reading the static JSON.
 
 ## How the rules map to code
 - **Tasks due this week**: `lib/dashboard-data.js` — Owner = `TASK_OWNER_NAME`, Status not Done, due within `TASK_LOOKAHEAD_DAYS`, sorted by date then client then task. Companies in `EXCLUDE_COMPANIES` are filtered out.
 - **Next client touchpoints**: calendar attendee emails matched against Clients CRM contact emails, within `MEETING_LOOKAHEAD_DAYS`. Video link = call, physical location = face to face.
 - **Client health**: per contact, using `LAST_CONTACT_YELLOW_DAYS` / `LAST_CONTACT_RED_DAYS`. No date logged shows as a distinct "unlogged" state.
 - **Company lookup**: dropdown near the top of the dashboard, listing every company from Notion except anything with "MKL" in the name (Maker Lab's own internal entries, never real clients). Selecting one goes to that company's own page (`company.html`), showing its contacts (name, email, last known contact date) and its open tasks (with description and due date, pulled from Notion). Built in `lib/dashboard-data.js` (the `companies` field) and rendered in `public/app.js` / `public/company.js`. Company names in the tasks table, touchpoints, and client health list also link to this page.
+- **Number of talent** (on each company page): count of current (non-terminated) people staffed on that account, from the "Client Contracts" tab of the talent tracker spreadsheet (`lib/sheets.js`, `GOOGLE_TALENT_SHEET_ID`). A few things worth knowing:
+  - Only that one tab is read — the spreadsheet has ~20 other tabs with HR-sensitive data (salaries, performance reviews, exit reasons, etc.) that this dashboard never touches.
+  - "Airwallex" and "Singapore Tourism Board" in the sheet are matched to "AirWallex" and "STB" in Notion. "YouTube" is tracked separately in the sheet and is deliberately left out of Google's count for now.
+  - Marriott and Warner Music aren't in this spreadsheet at all, so they show `0` — that's "not tracked here," not a confirmed zero.
+  - If the sheet can't be reached (auth not set up yet, access revoked, tab renamed), the number shows as "TBC" instead of a wrong number.
 
 ### Granola executive summaries — deliberately left out for now
 Adding a per-company executive summary pulled from the last 3 Granola conversations was considered, but paused: Granola's meeting notes contain things like overdue invoices, salary/rate details, and contract renewal risk, and this dashboard is a public GitHub Pages site. Publishing that content as-is would put sensitive information on a public URL. Ask Claude Code to build this once you've decided how it should be handled (kept private/local-only, redacted before publishing, or the site moved to access-controlled Pages).

@@ -58,6 +58,28 @@ async function fetchDashboardData(forceRefresh) {
   return res.json();
 }
 
+let dashboardData = null;
+
+function fmtContactDate(iso) {
+  return iso ? fmtDate(iso) : "no last-contact logged";
+}
+
+function renderCompanyDetail(company) {
+  const rows = company.contacts.length
+    ? company.contacts
+        .map((ct) => `<div class="contact-line"><span>${ct.name || "Unnamed contact"}</span><span class="contact-date">${fmtContactDate(ct.lastContact)}</span></div>`)
+        .join("")
+    : `<div class="empty-note">No contacts logged for this company yet.</div>`;
+  return `<div class="company-detail-title">${company.name} &mdash; contacts</div>${rows}`;
+}
+
+window.onCompanySelect = (companyId) => {
+  const detail = document.getElementById("company-detail");
+  if (!detail) return;
+  const company = (dashboardData && dashboardData.companies || []).find((c) => c.id === companyId);
+  detail.innerHTML = company ? renderCompanyDetail(company) : "";
+};
+
 async function load(forceRefresh) {
   const deck = document.getElementById("deck");
   try {
@@ -71,6 +93,7 @@ async function load(forceRefresh) {
 window.refreshDashboard = () => load(true);
 
 function render(deck, data) {
+  dashboardData = data;
   const totalTouchpoints = data.touchpoints.length;
   const companiesWithTouchpoints = new Set(data.touchpoints.flatMap((t) => t.attendees.map((a) => a.companyName))).size;
   const unlogged = data.health.filter((h) => h.flag === "unlogged").length;
@@ -123,6 +146,14 @@ function render(deck, data) {
         <div class="headline">${singaporeGreeting()}</div>
       </div>
       <button onclick="window.refreshDashboard()" style="background:#151515;color:#CFFF3D;border:1px solid #333;border-radius:8px;padding:8px 14px;font-size:12px;cursor:pointer">&#8635; Refresh</button>
+    </div>
+    <div class="panel">
+      <div class="panel-title">Company lookup</div>
+      <select id="company-select" onchange="window.onCompanySelect(this.value)">
+        <option value="">Select a company&hellip;</option>
+        ${(data.companies || []).map((c) => `<option value="${c.id}">${c.name}</option>`).join("")}
+      </select>
+      <div id="company-detail"></div>
     </div>
     <div class="stat-row">
       <div class="stat-card"><div class="stat-num" style="color:var(--ml-lime)">${data.tasks.length}</div><div class="stat-label">tasks due this week</div></div>

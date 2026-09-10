@@ -126,6 +126,27 @@ text-align: center;
 
 .empty-note { font-size: 13px; color: #777; }
 
+#company-select {
+  width: 100%;
+  padding: 9px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--ml-panel-border);
+  background: #fff;
+  color: #111;
+  font-size: 13px;
+  font-family: inherit;
+}
+.company-detail-title { font-weight: 700; font-size: 13px; margin: 12px 0 8px; }
+.contact-line {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  padding: 5px 0;
+  border-top: 1px solid #ddd;
+}
+.contact-line:first-of-type { border-top: none; }
+.contact-date { color: #777; font-size: 12px; }
+
 .automation-row {
   display: flex;
   justify-content: space-between;

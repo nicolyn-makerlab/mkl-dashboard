@@ -191,6 +191,7 @@ text-align: center;
 .table-scroll { overflow-x: auto; }
 .task-table-wide { table-layout: fixed; min-width: 700px; }
 .wrap-cell { white-space: normal; word-break: break-word; }
+.center-cell { text-align: center; }
 
 .email-link { color: inherit; text-decoration: underline; text-decoration-color: #aaa; }
 .email-link:hover { color: var(--ml-blue); }

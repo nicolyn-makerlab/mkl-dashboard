@@ -23,13 +23,16 @@ function renderRoster(roster) {
     </div>`;
 }
 
-function render(deck, company) {
+function render(deck, company, allCompanies) {
   deck.innerHTML = `
     <div class="logo-wrap"><img src="logo.jpg" alt="Maker Lab" /></div>
     <div class="deck-header">
-      <div>
-        <div class="eyebrow"><a href="company.html?id=${encodeURIComponent(company.id)}" class="back-link">&larr; Back to ${company.name}</a></div>
-        <div class="company-title">${company.name} talent</div>
+      <div class="header-left">
+        ${renderHamburgerNav(allCompanies)}
+        <div>
+          <div class="eyebrow"><a href="company.html?id=${encodeURIComponent(company.id)}" class="back-link">&larr; Back to ${company.name}</a></div>
+          <div class="company-title">${company.name} talent</div>
+        </div>
       </div>
     </div>
     <div class="panel">
@@ -52,7 +55,7 @@ async function load() {
       deck.innerHTML = `<div class="loading">Company not found. <a href="index.html" style="color:var(--ml-lime)">Back to dashboard</a></div>`;
       return;
     }
-    render(deck, company);
+    render(deck, company, data.companies || []);
   } catch (err) {
     deck.innerHTML = `<div class="loading">Couldn't load talent data: ${err.message}</div>`;
   }

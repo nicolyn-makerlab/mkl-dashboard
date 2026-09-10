@@ -59,16 +59,16 @@ function render(deck, company, allCompanies) {
       <div class="stat-card"><div class="stat-num">TBC</div><div class="stat-label">&nbsp;</div></div>
     </div>
     <div class="panel">
-      <div class="panel-title">Team pulse</div>
-      <div class="empty-note">Coming soon &mdash; a summary of team pulse based on talent conversations. Source not decided yet.</div>
+      <div class="panel-title">Key Chats</div>
+      <div class="empty-note">Coming soon &mdash; pulled from Google Spaces. Needs a Google Chat connector, which isn't set up yet.</div>
     </div>
     <div class="panel">
       <div class="panel-title">Tasks</div>
       ${renderTasks(company.tasks || [])}
     </div>
     <div class="panel">
-      <div class="panel-title">Last five company topics</div>
-      <div class="empty-note">Coming soon &mdash; pulled from Google Spaces. Needs a Google Chat connector, which isn't set up yet.</div>
+      <div class="panel-title">Team pulse</div>
+      <div class="empty-note">Coming soon &mdash; a summary of team pulse based on talent conversations. Source not decided yet.</div>
     </div>
     <div class="panel">
       <div class="panel-title">Granola executive summary (last 4 weeks)</div>

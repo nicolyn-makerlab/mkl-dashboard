@@ -122,6 +122,10 @@ function render(deck, data) {
       <div class="stat-card"><div class="stat-num">${unlogged}</div><div class="stat-label">contacts with no last-contact logged</div></div>
     </div>
     <div class="panel">
+      <div class="panel-title">Executive summary</div>
+      <div class="empty-note">Coming soon &mdash; top 3 points across clients (Company, Client when relevant, and the key point), pulled from Granola and Chats. Source setup pending.</div>
+    </div>
+    <div class="panel">
       <div class="panel-title">Tasks due this week</div>
       <table class="task-table">
         <tr><th>Date</th><th>Client</th><th>Task</th><th>Owner</th><th>Status</th></tr>

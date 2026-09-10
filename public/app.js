@@ -115,17 +115,17 @@ function render(deck, data) {
       </div>
       <button onclick="window.refreshDashboard()" style="background:#151515;color:var(--ml-lime);border:1px solid #333;border-radius:8px;padding:8px 14px;font-size:12px;cursor:pointer">&#8635; Refresh</button>
     </div>
+    <div class="stat-row">
+      <div class="stat-card"><div class="stat-num">${data.tasks.length}</div><div class="stat-label">tasks due this week</div></div>
+      <div class="stat-card"><div class="stat-num">${totalTouchpoints}</div><div class="stat-label">meetings scheduled, ${companiesWithTouchpoints} client${companiesWithTouchpoints === 1 ? "" : "s"}</div></div>
+      <div class="stat-card"><div class="stat-num">${unlogged}</div><div class="stat-label">contacts with no last-contact logged</div></div>
+    </div>
     <div class="panel">
       <div class="panel-title">Company lookup</div>
       <select id="company-select" onchange="window.onCompanySelect(this.value)">
         <option value="">Select a company&hellip;</option>
         ${(data.companies || []).map((c) => `<option value="${c.id}">${c.name}</option>`).join("")}
       </select>
-    </div>
-    <div class="stat-row">
-      <div class="stat-card"><div class="stat-num">${data.tasks.length}</div><div class="stat-label">tasks due this week</div></div>
-      <div class="stat-card"><div class="stat-num">${totalTouchpoints}</div><div class="stat-label">meetings scheduled, ${companiesWithTouchpoints} client${companiesWithTouchpoints === 1 ? "" : "s"}</div></div>
-      <div class="stat-card"><div class="stat-num">${unlogged}</div><div class="stat-label">contacts with no last-contact logged</div></div>
     </div>
     <div class="panel">
       <div class="panel-title">Tasks due this week</div>

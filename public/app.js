@@ -84,13 +84,24 @@ function render(deck, data) {
     ? data.tasks.map((t) => `<tr><td>${fmtDate(t.dueDate)}</td><td>${companyLink(t.companyName, companyIndex)}</td><td>${t.name}</td><td>${t.owner}</td><td>${t.status}</td></tr>`).join("")
     : `<tr><td colspan="5" class="empty-note">Nothing due this week. Good spot to be in.</td></tr>`;
 
+  function groupByCompany(attendees) {
+    const byCompany = new Map();
+    for (const a of attendees) {
+      if (!byCompany.has(a.companyName)) byCompany.set(a.companyName, []);
+      byCompany.get(a.companyName).push(firstName(a.contactName));
+    }
+    return [...byCompany.entries()]
+      .map(([company, names]) => `${companyLink(company, companyIndex)} &mdash; ${names.join(", ")}`)
+      .join("; ");
+  }
+
   const touchpointHtml = data.calendarError
     ? `<div class="empty-note" style="color:#E24B4A">Calendar error: ${data.calendarError}</div>`
     : data.touchpoints.length
     ? data.touchpoints
         .map((t) => {
-          const names = t.attendees.map((a) => `${firstName(a.contactName)} (${companyLink(a.companyName, companyIndex)})`).join(", ");
-          return `<div class="touchpoint-row"><span class="icon">${meetingIcon(t.meetingType)}</span>${fmtDateTime(t.start)} &mdash; ${names}</div>`;
+          const grouped = groupByCompany(t.attendees);
+          return `<div class="touchpoint-row"><span class="icon">${meetingIcon(t.meetingType)}</span>${fmtDateTime(t.start)} &mdash; ${grouped}</div>`;
         })
         .join("")
     : `<div class="empty-note">No client meetings matched on your calendar in the lookahead window.</div>`;

@@ -54,7 +54,7 @@ function render(deck, company, allCompanies) {
       </div>
     </div>
     <div class="stat-row">
-      <div class="stat-card"><div class="stat-num">${company.talentCount === null || company.talentCount === undefined ? "TBC" : company.talentCount}</div><div class="stat-label">number of talent</div></div>
+      <a class="stat-card" href="talent.html?id=${encodeURIComponent(company.id)}"><div class="stat-num">${company.talentCount === null || company.talentCount === undefined ? "TBC" : company.talentCount}</div><div class="stat-label">number of talent</div></a>
       <div class="stat-card"><div class="stat-num">TBC</div><div class="stat-label">next scheduled quarterly review</div></div>
       <div class="stat-card"><div class="stat-num">TBC</div><div class="stat-label">&nbsp;</div></div>
     </div>

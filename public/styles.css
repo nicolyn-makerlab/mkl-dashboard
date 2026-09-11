@@ -129,6 +129,8 @@ body {
 text-align: center;
 }
 
+a.stat-card { display: block; text-decoration: none; }
+
 .stat-num { font-size: 26px; font-weight: 700; color: var(--ml-lime); }
 .stat-label { font-size: 12px; color: var(--ml-gray-text); margin-top: 2px; }
 .stat-label::first-letter { text-transform: uppercase; }

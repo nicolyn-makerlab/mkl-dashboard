@@ -6,9 +6,11 @@ name: Refresh chat topic summaries
 # It commits chat-summary-cache.json back to main; the regular dashboard
 # build just reads that file, no extra API calls on every refresh.
 on:
-  schedule:
-    # ~9am and ~5pm SGT (UTC+8) = 01:00 and 09:00 UTC
-    - cron: "0 1,9 * * *"
+  # PAUSED: schedule trigger removed after a real run put named individuals
+  # and personnel matters (leave, contract non-renewal) into title/outcome
+  # text, on a public repo/site - despite the prompt explicitly forbidding
+  # it. Re-enable the schedule only once the prompt/rules are fixed and
+  # re-verified. workflow_dispatch still works for a manual, reviewed run.
   workflow_dispatch: {}
 
 permissions:

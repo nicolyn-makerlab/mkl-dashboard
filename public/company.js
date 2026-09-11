@@ -38,6 +38,13 @@ function renderLatestTopics(topics) {
     .join("")}</ul>`;
 }
 
+function renderExecSummary(execSummary) {
+  if (!execSummary) {
+    return `<div class="empty-note">Not enough recent Granola activity to summarize yet.</div>`;
+  }
+  return `<div class="exec-summary-text">${execSummary}</div>`;
+}
+
 function gmailComposeUrl(email) {
   return `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}`;
 }
@@ -75,7 +82,7 @@ function render(deck, company, allCompanies) {
     </div>
     <div class="panel">
       <div class="panel-title">Executive Summary</div>
-      <div class="empty-note">Coming soon &mdash; on hold pending a decision on how to handle sensitive meeting content on a public dashboard.</div>
+      ${renderExecSummary(company.execSummary)}
     </div>
     <div class="panel">
       <div class="panel-title">Latest Topics</div>

@@ -184,6 +184,8 @@ a.stat-card { display: block; text-decoration: none; }
 
 .empty-note { font-size: 13px; color: #777; }
 
+.exec-summary-text { font-size: 13px; line-height: 1.5; }
+
 .topic-list { margin: 0; padding-left: 18px; font-size: 13px; }
 .topic-list li { margin-bottom: 6px; }
 .topic-title { font-weight: 700; }

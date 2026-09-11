@@ -78,10 +78,11 @@ Variables (same page, **Variables** tab — these aren't secret, just config):
 
 The Google account you authorized in step 2 also needs at least Viewer access to that talent spreadsheet, same as any other Google Sheet you'd share.
 
-For the Chat topic summaries (see below), add one more secret:
+For the Chat topic summaries and Executive Summary (see below), add these secrets:
 | Name | Value |
 |---|---|
 | `ANTHROPIC_API_KEY` | an API key from https://console.anthropic.com (separate from your Claude subscription — this is metered, pay-as-you-go usage) |
+| `GRANOLA_API_KEY` | from your Granola workspace settings — requires a Business/Enterprise plan |
 
 ### 5. Enable Pages
 **Settings → Pages → Build and deployment → Source: GitHub Actions**
@@ -122,8 +123,19 @@ The very next real run after that decision proved prompt instructions alone aren
 
 **Known limitation:** Google Chat's own thread grouping turned out to be mostly single-message in practice (207 threads across 220 real messages in one space), so it doesn't reliably connect a multi-message discussion. The AI reads the whole chronological transcript and identifies discussions itself instead, which works but isn't as precise as true thread-based grouping would be. A discussion that spans multiple *separate* Chat spaces (not just multiple messages in one space) isn't connected at all - Chat has no way to link those, and this doesn't attempt to guess.
 
-### Granola executive summaries — deliberately left out for now
-Adding a per-company executive summary pulled from the last 3 Granola conversations was considered, but paused: Granola's meeting notes contain things like overdue invoices, salary/rate details, and contract renewal risk, and this dashboard is a public GitHub Pages site. Publishing that content as-is would put sensitive information on a public URL. Ask Claude Code to build this once you've decided how it should be handled (kept private/local-only, redacted before publishing, or the site moved to access-controlled Pages).
+### Executive Summary (Granola)
+Each company page shows a single evergreen paragraph describing the account at a glance — what the engagement covers, current focus areas, and general tenor — generated from recent Granola meeting notes (`lib/granola-summary.js`). This is the feature the README used to say was "deliberately left out for now" over the same public-repo privacy concern that led to the Chat incident below: Granola notes routinely contain overdue invoices, rates, and contract-renewal risk. Rather than relax the same rules Chat started with, this one starts from the stricter end from day one:
+
+- No individual's name, first or last, on either side — the prompt is told to write "the client team"/"the account team" instead, and a code-level backstop (`scrubNames()`) redacts any name it still recognizes from the actual meeting attendees, since prompt-only compliance already proved unreliable once (see the Chat incident above).
+- No dollar amounts, rates, budgets, headcounts, or percentages — `scrubFigures()` strips anything that looks like one, as a backstop to the same prompt rule.
+- No invoice/payment status, no contract-renewal risk assessment or exact renewal dates.
+- One evergreen overview, not a per-meeting recap.
+
+**Matching notes to companies.** A note's attendee email domain against known client contact domains (from Clients CRM) is the confident signal; a company name appearing in the note title is a weaker fallback, used for internal planning calls with no external attendee (common and legitimate — e.g. an internal KPI-framework session for a client). Domain match wins when both are checked. `TITLE_FALLBACK_EXCLUDE` in `lib/granola-summary.js` disables the title fallback for company names too generic to trust in a title match — currently "Google" (matches "Google Sheets/Calendar/Chat" mentions) and "Workday" (matches the internal HR/payroll tool of the same name — confirmed by a real note, "Workday download / Nicolyn", with zero `workday.com` attendees). Add a company here if a similar false match shows up.
+
+**Not yet on a schedule.** Unlike `refresh-chat-summaries.yml`, `.github/workflows/refresh-granola-summaries.yml` is `workflow_dispatch`-only for now — run it manually from the Actions tab and check the actual `granola-summary-cache.json` content it produces before turning on a cron schedule (mirror the Chat one, or pick your own cadence).
+
+Requires a `GRANOLA_API_KEY` secret (Granola workspace settings, Business/Enterprise plan) — see the setup table below. `npm run granola-check` lists recent notes and prints one note's full detail shape without calling Anthropic or writing anything, useful for confirming the connection works.
 
 ## Known gaps to ask Claude Code to close
 - Company-to-touchpoint matching only checks attendee email, not a location/name fallback.

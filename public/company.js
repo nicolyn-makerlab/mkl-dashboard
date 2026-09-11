@@ -12,11 +12,11 @@ function renderTasks(tasks) {
         <colgroup>
           <col style="width:100px"><col style="width:240px"><col><col style="width:100px"><col style="width:100px">
         </colgroup>
-        <tr><th>Due Date</th><th>Task</th><th>Description</th><th class="center-cell">Owner</th><th>Status</th></tr>
+        <tr><th>Due Date</th><th>Task</th><th>Description</th><th class="center-cell">Owner</th><th class="center-cell">Status</th></tr>
         ${tasks
           .map(
             (t) =>
-              `<tr><td>${t.dueDate ? fmtDate(t.dueDate) : "No due date"}</td><td>${t.name}</td><td class="wrap-cell">${t.description || ""}</td><td class="center-cell">${t.owner || ""}</td><td>${t.status || ""}</td></tr>`
+              `<tr><td>${t.dueDate ? fmtDate(t.dueDate) : "No due date"}</td><td>${t.name}</td><td class="wrap-cell">${t.description || ""}</td><td class="center-cell">${t.owner || ""}</td><td class="center-cell">${t.status || ""}</td></tr>`
           )
           .join("")}
       </table>

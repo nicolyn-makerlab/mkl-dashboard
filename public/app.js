@@ -81,7 +81,7 @@ function render(deck, data) {
   const attention = data.health.filter((h) => h.flag === "red" || h.flag === "yellow");
 
   const taskRows = data.tasks.length
-    ? data.tasks.map((t) => `<tr><td>${fmtDate(t.dueDate)}</td><td>${companyLink(t.companyName, companyIndex)}</td><td>${t.name}</td><td>${t.owner}</td><td>${t.status}</td></tr>`).join("")
+    ? data.tasks.map((t) => `<tr><td>${fmtDate(t.dueDate)}</td><td>${companyLink(t.companyName, companyIndex)}</td><td>${t.name}</td><td class="center-cell">${t.owner}</td><td>${t.status}</td></tr>`).join("")
     : `<tr><td colspan="5" class="empty-note">Nothing due this week. Good spot to be in.</td></tr>`;
 
   function groupByCompany(attendees) {
@@ -139,7 +139,7 @@ function render(deck, data) {
     <div class="panel">
       <div class="panel-title">Tasks due this week</div>
       <table class="task-table">
-        <tr><th>Date</th><th>Client</th><th>Task</th><th>Owner</th><th>Status</th></tr>
+        <tr><th>Date</th><th>Client</th><th>Task</th><th class="center-cell">Owner</th><th>Status</th></tr>
         ${taskRows}
       </table>
     </div>

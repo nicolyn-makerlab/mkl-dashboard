@@ -113,8 +113,10 @@ Which Chat space feeds which company is a manual list in `lib/chat-summary.js` (
 
 A company with no mapped space shows "Not connected for this company yet" rather than nothing, so it's clear that's a setup gap, not a bug.
 
-### Granola executive summaries — deliberately left out for now
-Adding a per-company executive summary pulled from the last 3 Granola conversations was considered, but paused: Granola's meeting notes contain things like overdue invoices, salary/rate details, and contract renewal risk, and this dashboard is a public GitHub Pages site. Publishing that content as-is would put sensitive information on a public URL. Ask Claude Code to build this once you've decided how it should be handled (kept private/local-only, redacted before publishing, or the site moved to access-controlled Pages).
+### Executive Summary (Granola) - in progress
+Each company page's "Executive Summary" panel is being wired up to Granola meeting notes, matched to a company the same way calendar touchpoints are (attendee email against Clients CRM contacts) - no manual mapping table needed. Same rule as Chat: abstracted topics only - no dollar amounts, invoice/payment status, salary or rate figures, or contract renewal risk assessments, since this dashboard is public.
+
+**Setup (Granola side):** requires a Business or Enterprise plan on the Granola workspace. In the Granola desktop app: Settings → Connectors → API keys → Create new key, choosing note access (your own notes, workspace public notes, or both). Add it as the `GRANOLA_API_KEY` repo secret. Then run `npm run granola-check` to confirm the key works and see what a real note looks like, before the real summarization is wired up.
 
 ## Known gaps to ask Claude Code to close
 - Company-to-touchpoint matching only checks attendee email, not a location/name fallback.

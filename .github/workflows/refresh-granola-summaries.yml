@@ -1,0 +1,48 @@
+name: Refresh Granola executive summaries
+
+# Manual-only for now (workflow_dispatch, no schedule) - this is the
+# Executive Summary feature the README flagged as paused pending a
+# privacy decision. Deliberately not auto-scheduled yet: run it, review
+# the actual generated granola-summary-cache.json content, and only add
+# a schedule (mirroring refresh-chat-summaries.yml's twice-daily cron)
+# once that's been checked against real data at least once.
+#
+# Separate from refresh-and-deploy.yml because summarizing calls the
+# Anthropic API, which has a real per-call cost - same reasoning as
+# refresh-chat-summaries.yml. Commits granola-summary-cache.json back to
+# main; the regular dashboard build just reads that file.
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  summarize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - run: npm ci
+
+      - name: Summarize recent Granola notes
+        run: node lib/granola-summary.js
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_COMPANIES_DS: ${{ vars.NOTION_COMPANIES_DS }}
+          NOTION_CLIENTS_CRM_DS: ${{ vars.NOTION_CLIENTS_CRM_DS }}
+          EXCLUDE_COMPANIES: ${{ vars.EXCLUDE_COMPANIES }}
+          GRANOLA_API_KEY: ${{ secrets.GRANOLA_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+
+      - name: Commit updated cache
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add granola-summary-cache.json
+          git diff --staged --quiet || git commit -m "Refresh Granola executive summaries"
+          git push

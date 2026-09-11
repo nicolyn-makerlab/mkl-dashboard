@@ -1,4 +1,131 @@
 {
-  "generatedAt": null,
-  "topicsByCompany": {}
+  "generatedAt": "2026-09-11T11:06:48.886Z",
+  "topicsByCompany": {
+    "STB": [
+      {
+        "title": "Emma's September leave coverage and extended leave definition",
+        "outcome": "Internal team confirmed leave is annual, not extended. Budget identified for freelancer contingency; awaiting Fabian's decision on utilization.",
+        "deliveredBy": "TBC"
+      },
+      {
+        "title": "Video editor fractional resource hire for team support",
+        "outcome": "Pending Fabian's paperwork approval and official confirmation. Budget reallocation document submitted to Fabian.",
+        "deliveredBy": "TBC"
+      },
+      {
+        "title": "Team tool access for Shawn (Capcut, LTX, Springboard)",
+        "outcome": "LTX and Springboard access to be provisioned; migrating to michael STB email. Capcut access to be obtained from existing shared account via Marcus.",
+        "deliveredBy": "TBC"
+      },
+      {
+        "title": "STB KPIs communication and tracking framework",
+        "outcome": "KPIs shared with client. Team and individual KPIs being mapped; awaiting client feedback over next two weeks before finalizing.",
+        "deliveredBy": "TBC"
+      },
+      {
+        "title": "Claims processing for June and August submissions",
+        "outcome": "Dani's June claims to be included with August claims for Fabian's approval to meet processing deadline.",
+        "deliveredBy": "TBC"
+      },
+      {
+        "title": "KPI definition for creative scorecard December target",
+        "outcome": "Creative scorecard KPI set at minimum 3.0/5 average client rating for December with ambition to hit 4.0 next year.",
+        "deliveredBy": "TBC"
+      },
+      {
+        "title": "Caren's individual work-related KPI framing",
+        "outcome": "Nicholas to check with Caren on specific KPI metrics for static-focused corporate work; understanding needed moving forward.",
+        "deliveredBy": "TBC"
+      },
+      {
+        "title": "AL leave approval for Nicholas Wong's son vaccination",
+        "outcome": "Approved; to include in application note that Marcus cleared it so HR is aware.",
+        "deliveredBy": "TBC"
+      },
+      {
+        "title": "SLA documentation for ClickUp tracking",
+        "outcome": "Rough Excel template guide created as alternative to ClickUp; pending approval to fill and share monthly.",
+        "deliveredBy": "TBC"
+      },
+      {
+        "title": "Brand guidelines and writing style confirmation for STB",
+        "outcome": "Mostly following British English; studio lead checking guidelines against work with AI checker tool.",
+        "deliveredBy": "TBC"
+      },
+      {
+        "title": "MVP mapping target for leisure campaign KPIs",
+        "outcome": "90% of leisure campaigns to map to MVPs; remaining 10% for non-destination-specific content like souvenirs and trend-jacking.",
+        "deliveredBy": "TBC"
+      },
+      {
+        "title": "KPI documentation updates and team review",
+        "outcome": "Nicholas to update SLA column; Marcus to provide thoughts on specific rows by late lunch; team alignment meeting rescheduled to 2:30pm.",
+        "deliveredBy": "TBC"
+      },
+      {
+        "title": "RFP costings documentation for STB",
+        "outcome": "RFP costings and price schedule shared; historical percentages not available as documentation covers 2026-2028 only.",
+        "deliveredBy": "TBC"
+      },
+      {
+        "title": "Development plan feedback for Dani capability gaps",
+        "outcome": "To be addressed; capability gaps feedback pending to inform Dani's development plan.",
+        "deliveredBy": "TBC"
+      }
+    ],
+    "Trade Desk": [],
+    "KFC": [
+      {
+        "title": "August invoicing data verification and submission",
+        "outcome": "August invoices for team, production, and tooling costs submitted; data verified as complete",
+        "deliveredBy": "TBC"
+      },
+      {
+        "title": "Overdue invoices and payment terms compliance",
+        "outcome": "Two pending invoices from June and July exceed 45-day payment terms; awaiting clearance timeline alignment and acknowledgement from recipients",
+        "deliveredBy": "TBC"
+      },
+      {
+        "title": "Pending July claims receipt timeline",
+        "outcome": "Timeline for receiving July claims still pending; no confirmation provided",
+        "deliveredBy": "TBC"
+      },
+      {
+        "title": "Follow-up outreach to unresponsive parties",
+        "outcome": "Instructed to reach out via best judgment; multiple contact attempts planned before escalation",
+        "deliveredBy": "TBC"
+      }
+    ],
+    "Grab": [
+      {
+        "title": "Kenneth's non-renewal notification timing",
+        "outcome": "Inform Kenneth sooner than initially planned (around 1 Oct); HR to confirm exact date; initially Monday proposed; client and Apple to be updated",
+        "deliveredBy": "TBC"
+      },
+      {
+        "title": "Kenneth's leave days and handover planning",
+        "outcome": "Kenneth to be informed about remaining leave days and requirement to use them; client planning handover with Chandni; shows scheduled 8, 22, 23 Oct flagged",
+        "deliveredBy": "TBC"
+      },
+      {
+        "title": "Grab MSA renewal and extension terms",
+        "outcome": "Pending confirmation from Reema and Joshua on MSA changes; opportunity to update termination notice period and penalty fee from latest procurement agreement",
+        "deliveredBy": "TBC"
+      },
+      {
+        "title": "Grab MSA extension duration preference",
+        "outcome": "Client requesting 2-year extension instead of yearly to reduce paperwork; current latest extension ends 2026 Nov",
+        "deliveredBy": "TBC"
+      }
+    ],
+    "Workday": [
+      {
+        "title": "Adrian's check-in notes update for client report",
+        "outcome": "Notes updated in sheet by 2 pm; ready to send update to Claudia",
+        "deliveredBy": "TBC"
+      }
+    ],
+    "Google": [],
+    "AirWallex": []
+  }
 }

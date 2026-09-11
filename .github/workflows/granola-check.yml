@@ -1,0 +1,25 @@
+name: Granola diagnostic check
+
+# Manual-only, no schedule. Lists recent Granola notes and prints one
+# note's full detail shape (redacted) so lib/granola-summary.js can be
+# written against the API's actual field names. Doesn't call Anthropic,
+# doesn't write or commit anything.
+on:
+  workflow_dispatch: {}
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - run: npm ci
+
+      - name: Check Granola connection
+        run: npm run granola-check
+        env:
+          GRANOLA_API_KEY: ${{ secrets.GRANOLA_API_KEY }}

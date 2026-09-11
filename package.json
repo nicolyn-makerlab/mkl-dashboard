@@ -9,7 +9,8 @@
     "build": "node lib/build.js",
     "auth": "node lib/google-auth-setup.js",
     "chat-check": "node lib/chat-check.js",
-    "chat-thread-check": "node lib/chat-thread-check.js"
+    "chat-thread-check": "node lib/chat-thread-check.js",
+    "granola-check": "node lib/granola-check.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.124.0",

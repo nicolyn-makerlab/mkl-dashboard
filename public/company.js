@@ -23,14 +23,19 @@ function renderTasks(tasks) {
     </div>`;
 }
 
-function renderChatTopics(topics) {
+function renderLatestTopics(topics) {
   if (topics === null || topics === undefined) {
     return `<div class="empty-note">Not connected for this company yet.</div>`;
   }
   if (!topics.length) {
-    return `<div class="empty-note">No notable topics in the last week.</div>`;
+    return `<div class="empty-note">No notable topics in the last 2 weeks.</div>`;
   }
-  return `<ul class="topic-list">${topics.map((t) => `<li>${t}</li>`).join("")}</ul>`;
+  return `<ul class="topic-list topic-list-rich">${topics
+    .map(
+      (t) =>
+        `<li><span class="topic-title">${t.title}</span> &mdash; ${t.outcome} <span class="topic-owner">(${t.deliveredBy})</span></li>`
+    )
+    .join("")}</ul>`;
 }
 
 function gmailComposeUrl(email) {
@@ -73,8 +78,8 @@ function render(deck, company, allCompanies) {
       <div class="empty-note">Coming soon &mdash; on hold pending a decision on how to handle sensitive meeting content on a public dashboard.</div>
     </div>
     <div class="panel">
-      <div class="panel-title">Key Chats</div>
-      ${renderChatTopics(company.chatTopics)}
+      <div class="panel-title">Latest Topics</div>
+      ${renderLatestTopics(company.chatTopics)}
     </div>
     <div class="panel">
       <div class="panel-title">Tasks</div>

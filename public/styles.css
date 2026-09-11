@@ -16,7 +16,7 @@
 
 body {
   margin: 0;
-  background: #EDEBE4;
+  background: #CFCFCF;
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: #111;
 }
@@ -128,6 +128,8 @@ body {
   padding: 14px;
 text-align: center;
 }
+
+a.stat-card { display: block; text-decoration: none; }
 
 .stat-num { font-size: 26px; font-weight: 700; color: var(--ml-lime); }
 .stat-label { font-size: 12px; color: var(--ml-gray-text); margin-top: 2px; }

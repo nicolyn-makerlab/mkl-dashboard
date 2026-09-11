@@ -186,6 +186,8 @@ a.stat-card { display: block; text-decoration: none; }
 
 .topic-list { margin: 0; padding-left: 18px; font-size: 13px; }
 .topic-list li { margin-bottom: 6px; }
+.topic-title { font-weight: 700; }
+.topic-owner { color: #777; }
 
 .company-link { color: inherit; font-weight: 700; text-decoration: underline; text-decoration-color: #aaa; }
 .company-link:hover { color: var(--ml-blue); }

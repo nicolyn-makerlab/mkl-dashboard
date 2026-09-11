@@ -30,7 +30,12 @@ function renderLatestTopics(topics) {
   if (!topics.length) {
     return `<div class="empty-note">No notable topics in the last 2 weeks.</div>`;
   }
-  return `<ul class="topic-list">${topics.map((t) => `<li>${t}</li>`).join("")}</ul>`;
+  return `<ul class="topic-list topic-list-rich">${topics
+    .map(
+      (t) =>
+        `<li><span class="topic-title">${t.title}</span> &mdash; ${t.outcome} <span class="topic-owner">(${t.deliveredBy})</span></li>`
+    )
+    .join("")}</ul>`;
 }
 
 function gmailComposeUrl(email) {

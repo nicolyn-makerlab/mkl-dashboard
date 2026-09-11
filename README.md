@@ -115,6 +115,8 @@ Two manual lists in `lib/chat-summary.js` need upkeep:
 
 A company with no mapped space shows "Not connected for this company yet" rather than nothing, so it's clear that's a setup gap, not a bug.
 
+**Privacy note.** This dashboard's repo and published Pages site are both public — anyone with the URL, no login required. A real run on 2026-09-11 put personnel matters (leave, a contract non-renewal) into `title`/`outcome` text, despite the prompt explicitly forbidding names there at the time. Nicolyn's explicit call afterward: first names are allowed anywhere in a topic (part of her role is knowing about talent renewals/exits), but never a full name, and never dollar amounts or exact figures. If this dashboard ever needs to be genuinely private (not just unlinked), it needs real access control — GitHub's access-controlled Pages (requires Enterprise Cloud) or a separate private view — not just a client-side password page, which doesn't protect `chat-summary-cache.json` or `dashboard-data.json` themselves from being fetched directly.
+
 **Known limitation:** Google Chat's own thread grouping turned out to be mostly single-message in practice (207 threads across 220 real messages in one space), so it doesn't reliably connect a multi-message discussion. The AI reads the whole chronological transcript and identifies discussions itself instead, which works but isn't as precise as true thread-based grouping would be. A discussion that spans multiple *separate* Chat spaces (not just multiple messages in one space) isn't connected at all - Chat has no way to link those, and this doesn't attempt to guess.
 
 ### Granola executive summaries — deliberately left out for now

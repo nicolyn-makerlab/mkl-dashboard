@@ -37,20 +37,18 @@ function firstName(fullName) {
 }
 
 async function fetchDashboardData(forceRefresh) {
+  // On the published static site there's no live API - "refresh" just
+  // re-fetches this file (cache: "no-store" means it's never stale).
+  // /api/dashboard only exists when running the local dev server
+  // (server.js), and is used purely as a fallback for that case, e.g.
+  // before the static file has ever been built locally.
   try {
-    if (!forceRefresh) {
-      const res = await fetch("dashboard-data.json", { cache: "no-store" });
-      if (res.ok) return res.json();
-    }
+    const res = await fetch("dashboard-data.json", { cache: "no-store" });
+    if (res.ok) return res.json();
   } catch (_) {}
   const res = await fetch(`/api/dashboard${forceRefresh ? "?refresh=1" : ""}`);
   return res.json();
 }
-
-window.onCompanySelect = (companyId) => {
-  if (!companyId) return;
-  window.location.href = `company.html?id=${encodeURIComponent(companyId)}`;
-};
 
 function buildCompanyIndex(data) {
   const byName = {};
@@ -86,13 +84,24 @@ function render(deck, data) {
     ? data.tasks.map((t) => `<tr><td>${fmtDate(t.dueDate)}</td><td>${companyLink(t.companyName, companyIndex)}</td><td>${t.name}</td><td>${t.owner}</td><td>${t.status}</td></tr>`).join("")
     : `<tr><td colspan="5" class="empty-note">Nothing due this week. Good spot to be in.</td></tr>`;
 
+  function groupByCompany(attendees) {
+    const byCompany = new Map();
+    for (const a of attendees) {
+      if (!byCompany.has(a.companyName)) byCompany.set(a.companyName, []);
+      byCompany.get(a.companyName).push(firstName(a.contactName));
+    }
+    return [...byCompany.entries()]
+      .map(([company, names]) => `${companyLink(company, companyIndex)} &mdash; ${names.join(", ")}`)
+      .join("; ");
+  }
+
   const touchpointHtml = data.calendarError
     ? `<div class="empty-note" style="color:#E24B4A">Calendar error: ${data.calendarError}</div>`
     : data.touchpoints.length
     ? data.touchpoints
         .map((t) => {
-          const names = t.attendees.map((a) => `${firstName(a.contactName)} (${companyLink(a.companyName, companyIndex)})`).join(", ");
-          return `<div class="touchpoint-row"><span class="icon">${meetingIcon(t.meetingType)}</span>${fmtDateTime(t.start)} &mdash; ${names}</div>`;
+          const grouped = groupByCompany(t.attendees);
+          return `<div class="touchpoint-row"><span class="icon">${meetingIcon(t.meetingType)}</span>${fmtDateTime(t.start)} &mdash; ${grouped}</div>`;
         })
         .join("")
     : `<div class="empty-note">No client meetings matched on your calendar in the lookahead window.</div>`;
@@ -109,11 +118,14 @@ function render(deck, data) {
   deck.innerHTML = `
     <div class="logo-wrap"><img src="logo.jpg" alt="Maker Lab" /></div>
     <div class="deck-header">
-      <div>
-        <div class="eyebrow">${new Date(data.generatedAt).toLocaleString(undefined, { weekday: "short", month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })}</div>
-        <div class="headline">${singaporeGreeting()}</div>
+      <div class="header-left">
+        ${renderHamburgerNav(data.companies)}
+        <div>
+          <div class="eyebrow">${new Date(data.generatedAt).toLocaleString(undefined, { weekday: "short", month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })}</div>
+          <div class="headline">${singaporeGreeting()}</div>
+        </div>
       </div>
-      <button onclick="window.refreshDashboard()" style="background:#151515;color:var(--ml-lime);border:1px solid #333;border-radius:8px;padding:8px 14px;font-size:12px;cursor:pointer">&#8635; Refresh</button>
+      <button class="refresh-btn" onclick="window.refreshDashboard()" aria-label="Refresh">&#8635;</button>
     </div>
     <div class="stat-row">
       <div class="stat-card"><div class="stat-num">${data.tasks.length}</div><div class="stat-label">tasks due this week</div></div>
@@ -121,11 +133,8 @@ function render(deck, data) {
       <div class="stat-card"><div class="stat-num">${unlogged}</div><div class="stat-label">contacts with no last-contact logged</div></div>
     </div>
     <div class="panel">
-      <div class="panel-title">Company lookup</div>
-      <select id="company-select" onchange="window.onCompanySelect(this.value)">
-        <option value="">Select a company&hellip;</option>
-        ${(data.companies || []).map((c) => `<option value="${c.id}">${c.name}</option>`).join("")}
-      </select>
+      <div class="panel-title">Executive summary</div>
+      <div class="empty-note">Coming soon &mdash; top 3 points across clients (Company, Client when relevant, and the key point), pulled from Granola and Chats. Source setup pending.</div>
     </div>
     <div class="panel">
       <div class="panel-title">Tasks due this week</div>

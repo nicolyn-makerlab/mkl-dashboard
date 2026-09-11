@@ -16,7 +16,7 @@
 
 body {
   margin: 0;
-  background: #EDEBE4;
+  background: #CFCFCF;
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: #111;
 }
@@ -47,11 +47,24 @@ body {
 .deck-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
   margin-bottom: 22px;
 }
 
-.header-left { display: flex; align-items: center; gap: 14px; }
+.header-left { display: flex; flex-direction: column; align-items: flex-start; gap: 18px; }
+
+.refresh-btn {
+  background: #151515;
+  color: var(--ml-lime);
+  border: 1px solid #333;
+  border-radius: 8px;
+  width: 38px;
+  height: 38px;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  flex-shrink: 0;
+}
 
 .nav-wrap { position: relative; flex-shrink: 0; }
 
@@ -120,6 +133,7 @@ a.stat-card { display: block; text-decoration: none; }
 
 .stat-num { font-size: 26px; font-weight: 700; color: var(--ml-lime); }
 .stat-label { font-size: 12px; color: var(--ml-gray-text); margin-top: 2px; }
+.stat-label::first-letter { text-transform: uppercase; }
 
 .panel {
   background: var(--ml-panel);
@@ -170,27 +184,6 @@ a.stat-card { display: block; text-decoration: none; }
 
 .empty-note { font-size: 13px; color: #777; }
 
-#company-select {
-  width: 100%;
-  padding: 9px 10px;
-  border-radius: 8px;
-  border: 1px solid var(--ml-panel-border);
-  background: #fff;
-  color: #111;
-  font-size: 13px;
-  font-family: inherit;
-}
-.company-detail-title { font-weight: 700; font-size: 13px; margin: 12px 0 8px; }
-.contact-line {
-  display: flex;
-  justify-content: space-between;
-  font-size: 13px;
-  padding: 5px 0;
-  border-top: 1px solid #ddd;
-}
-.contact-line:first-of-type { border-top: none; }
-.contact-date { color: #777; font-size: 12px; }
-
 .company-link { color: inherit; font-weight: 700; text-decoration: underline; text-decoration-color: #aaa; }
 .company-link:hover { color: var(--ml-blue); }
 
@@ -198,10 +191,12 @@ a.stat-card { display: block; text-decoration: none; }
 .back-link:hover { color: var(--ml-lime); }
 
 .table-scroll { overflow-x: auto; }
-.task-table-wide { table-layout: fixed; min-width: 640px; }
+.task-table-wide { table-layout: fixed; min-width: 700px; }
 .wrap-cell { white-space: normal; word-break: break-word; }
+.center-cell { text-align: center; }
 
-.contact-email { color: #777; font-size: 12px; margin-left: 6px; }
+.email-link { color: inherit; text-decoration: underline; text-decoration-color: #aaa; }
+.email-link:hover { color: var(--ml-blue); }
 
 @media (max-width: 640px) {
   .stat-row, .two-col { grid-template-columns: 1fr; }

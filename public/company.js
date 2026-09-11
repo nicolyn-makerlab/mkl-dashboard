@@ -23,6 +23,16 @@ function renderTasks(tasks) {
     </div>`;
 }
 
+function renderChatTopics(topics) {
+  if (topics === null || topics === undefined) {
+    return `<div class="empty-note">Not connected for this company yet.</div>`;
+  }
+  if (!topics.length) {
+    return `<div class="empty-note">No notable topics in the last week.</div>`;
+  }
+  return `<ul class="topic-list">${topics.map((t) => `<li>${t}</li>`).join("")}</ul>`;
+}
+
 function gmailComposeUrl(email) {
   return `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}`;
 }
@@ -64,7 +74,7 @@ function render(deck, company, allCompanies) {
     </div>
     <div class="panel">
       <div class="panel-title">Key Chats</div>
-      <div class="empty-note">Coming soon &mdash; pulled from Google Spaces. Needs a Google Chat connector, which isn't set up yet.</div>
+      ${renderChatTopics(company.chatTopics)}
     </div>
     <div class="panel">
       <div class="panel-title">Tasks</div>

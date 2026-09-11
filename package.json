@@ -7,9 +7,11 @@
   "scripts": {
     "start": "node server.js",
     "build": "node lib/build.js",
-    "auth": "node lib/google-auth-setup.js"
+    "auth": "node lib/google-auth-setup.js",
+    "chat-check": "node lib/chat-check.js"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.124.0",
     "@notionhq/client": "^5.26.0",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",

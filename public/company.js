@@ -23,6 +23,16 @@ function renderTasks(tasks) {
     </div>`;
 }
 
+function renderExecSummary(topics) {
+  if (topics === null || topics === undefined) {
+    return `<div class="empty-note">No recent Granola notes matched for this company yet.</div>`;
+  }
+  if (!topics.length) {
+    return `<div class="empty-note">No notable topics in the last 4 weeks.</div>`;
+  }
+  return `<ul class="topic-list">${topics.map((t) => `<li>${t}</li>`).join("")}</ul>`;
+}
+
 function renderChatTopics(topics) {
   if (topics === null || topics === undefined) {
     return `<div class="empty-note">Not connected for this company yet.</div>`;
@@ -70,7 +80,7 @@ function render(deck, company, allCompanies) {
     </div>
     <div class="panel">
       <div class="panel-title">Executive Summary</div>
-      <div class="empty-note">Coming soon &mdash; on hold pending a decision on how to handle sensitive meeting content on a public dashboard.</div>
+      ${renderExecSummary(company.execSummary)}
     </div>
     <div class="panel">
       <div class="panel-title">Key Chats</div>

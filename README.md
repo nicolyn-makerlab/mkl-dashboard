@@ -78,10 +78,11 @@ Variables (same page, **Variables** tab — these aren't secret, just config):
 
 The Google account you authorized in step 2 also needs at least Viewer access to that talent spreadsheet, same as any other Google Sheet you'd share.
 
-For the Chat topic summaries (see below), add one more secret:
+For the Chat and Granola summaries (see below), add these secrets:
 | Name | Value |
 |---|---|
 | `ANTHROPIC_API_KEY` | an API key from https://console.anthropic.com (separate from your Claude subscription — this is metered, pay-as-you-go usage) |
+| `GRANOLA_API_KEY` | from the Granola desktop app: Settings → Connectors → API keys (requires a Business or Enterprise plan) |
 
 ### 5. Enable Pages
 **Settings → Pages → Build and deployment → Source: GitHub Actions**
@@ -113,8 +114,12 @@ Which Chat space feeds which company is a manual list in `lib/chat-summary.js` (
 
 A company with no mapped space shows "Not connected for this company yet" rather than nothing, so it's clear that's a setup gap, not a bug.
 
-### Granola executive summaries — deliberately left out for now
-Adding a per-company executive summary pulled from the last 3 Granola conversations was considered, but paused: Granola's meeting notes contain things like overdue invoices, salary/rate details, and contract renewal risk, and this dashboard is a public GitHub Pages site. Publishing that content as-is would put sensitive information on a public URL. Ask Claude Code to build this once you've decided how it should be handled (kept private/local-only, redacted before publishing, or the site moved to access-controlled Pages).
+### Executive Summary (Granola)
+Each company page's "Executive Summary" panel shows a short, AI-generated list of topics from that client's last 3 Granola meeting notes (`lib/granola-summary.js`). A note is matched to a company by attendee email against Clients CRM contacts first (same approach as calendar touchpoints); if a note has no useful attendee data (e.g. it wasn't linked to a calendar invite - this happens), it falls back to checking whether a company name appears in the note's title. No manual mapping table needed, unlike Chat.
+
+Same idea as Chat, with stricter rules given what Granola notes actually contain: abstracted topics only - no dollar amounts, invoice/payment status, salary or rate figures, contract renewal risk assessments, or named individuals. This runs on its own twice-daily schedule (`.github/workflows/refresh-granola-summaries.yml`), same reasoning as Chat - summarization costs per call, so it's decoupled from the 30-min refresh. Writes `granola-summary-cache.json`, committed back to `main` automatically; `lib/build.js` just reads it.
+
+**Setup (Granola side):** requires a Business or Enterprise plan on the Granola workspace. In the Granola desktop app: Settings → Connectors → API keys → Create new key, choosing note access (your own notes, workspace public notes, or both). Add it as the `GRANOLA_API_KEY` repo secret. `npm run granola-check` is a standalone diagnostic - lists recent notes and confirms the key works without touching the real dashboard build.
 
 ## Known gaps to ask Claude Code to close
 - Company-to-touchpoint matching only checks attendee email, not a location/name fallback.

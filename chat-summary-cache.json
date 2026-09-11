@@ -1,10 +1,29 @@
 {
-  "generatedAt": "2026-09-11T09:12:40.367Z",
+  "generatedAt": "2026-09-11T09:15:25.695Z",
   "topicsByCompany": {
-    "STB": [],
-    "Trade Desk": [],
-    "KFC": [],
-    "Grab": [],
+    "STB": [
+      "KPI mapping and client feedback",
+      "Creative scorecard ratings and performance targets",
+      "Campaign mapping to core business model",
+      "Team coverage and workload distribution",
+      "RFP costings and pricing documentation"
+    ],
+    "Trade Desk": [
+      "Communication follow-up regarding missed email",
+      "Planned conversation scheduled for next day"
+    ],
+    "KFC": [
+      "Invoice acknowledgment and payment follow-up",
+      "Overdue invoices exceeding payment terms",
+      "Client communication and responsiveness issues",
+      "Service delivery status and availability"
+    ],
+    "Grab": [
+      "MSA renewal and agreement updates with client",
+      "Termination notice period and penalty fee changes",
+      "Contract extension duration negotiation",
+      "Internal stakeholder confirmation needed"
+    ],
     "Workday": [],
     "Google": [],
     "AirWallex": []

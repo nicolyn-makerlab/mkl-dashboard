@@ -1,55 +1,55 @@
 {
-  "generatedAt": "2026-09-13T09:42:05.785Z",
+  "generatedAt": "2026-09-14T01:16:00.185Z",
   "topicsByCompany": {
     "STB": [
       {
-        "title": "Emma's leave coverage and extended leave definition",
-        "outcome": "Internal team confirmed this is annual leave, not extended leave. Variance budget identified for freelancer contingency; awaiting Fabian's approval on utilization.",
+        "title": "Emma's September leave coverage and extended leave definition",
+        "outcome": "Internal team confirmed not extended leave. Variance budget identified for potential freelancer; awaiting Fabian's decision on utilization.",
         "deliveredBy": "TBC"
       },
       {
-        "title": "Video editor resource for Emma's September absence",
-        "outcome": "Budget reallocated from senior content creator variance. Pending Fabian's paperwork and official confirmation to proceed with freelancer hire in December.",
+        "title": "Video editor resource for Emma's leave period",
+        "outcome": "Pending Fabian's approval of rationale and budget reallocation for December freelancer hire.",
         "deliveredBy": "TBC"
       },
       {
-        "title": "Team tool access for Shawn",
-        "outcome": "LTX and Springboard access to be procured via CSM; will migrate to Michael STB account. Capcut Pro access to be obtained from Marcus's existing shared account.",
+        "title": "Tool access for Shawn",
+        "outcome": "Moving LTX and Springboard work to michael STB account; checking if Shawn can access existing Capcut Pro via Marcus.",
         "deliveredBy": "TBC"
       },
       {
-        "title": "KPI documentation and client communication",
-        "outcome": "Individual KPIs shared with client, team KPIs added to QBR. All KPIs now shared with client; Rubi and Sarah to map remaining KPIs over next two weeks. Caren's work understanding needed.",
+        "title": "STB individual and team KPIs communication",
+        "outcome": "Individual KPIs to be sent to client; team KPIs shared via presentation; incentive tracking rubric and weightage to be presented tomorrow.",
         "deliveredBy": "TBC"
       },
       {
-        "title": "Claims processing for June submissions",
-        "outcome": "Dani's June claims to be included in August claims submission to Fabian for approval to meet 90-day processing deadline.",
+        "title": "June claims processing for Dani",
+        "outcome": "Dani's overdue June claims to be included with August claims submission for Fabian's approval.",
         "deliveredBy": "TBC"
       },
       {
-        "title": "Creative scorecard KPI target for December",
-        "outcome": "Set minimum creative rating target at 3.0/5 average; ambition to hit 4.0 next year once playbook stabilizes. Both parties aligned.",
+        "title": "ClickUp SLA tracking method",
+        "outcome": "No easy automated method available; rough Excel template to be created and shared monthly if approved.",
         "deliveredBy": "TBC"
       },
       {
-        "title": "SLA documentation and tracking template",
-        "outcome": "Excel template created as alternative to ClickUp; awaiting approval to populate and share monthly.",
+        "title": "KPI mapping and documentation",
+        "outcome": "Client shared all KPIs yesterday; Rubi and sender will schedule time over next two weeks to ensure complete mapping.",
         "deliveredBy": "TBC"
       },
       {
-        "title": "Brand guidelines and language standards",
-        "outcome": "Guidelines shared; STB primarily follows British English with Singlish elements. Studio lead reviewing guidelines against work output.",
+        "title": "Creative scorecard KPI for December",
+        "outcome": "Set at average client rating of 3.0 or higher; push boundaries next year once playbook stabilizes.",
         "deliveredBy": "TBC"
       },
       {
-        "title": "MVP mapping for leisure campaign KPIs",
-        "outcome": "Agreed that 90% of leisure campaigns should map to MVPs; 10% allowance for non-destination campaigns and trend-jacking. Client expectations to be managed.",
+        "title": "Caren's work-related individual KPI",
+        "outcome": "Pending clarification with Caren on specific metric; similar to Emma but static content only.",
         "deliveredBy": "TBC"
       },
       {
-        "title": "Nicol's annual leave for son's vaccination",
-        "outcome": "AL approved by Marcus; Nicol to include manager clearance in application for HR awareness.",
+        "title": "Dani capability gaps feedback",
+        "outcome": "Gap assessment still needed to build development plan; will work on this separately.",
         "deliveredBy": "TBC"
       }
     ],
@@ -57,36 +57,36 @@
     "KFC": [
       {
         "title": "August invoicing data verification and submission",
-        "outcome": "All checked and confirmed; invoices to be sent out by end of day",
+        "outcome": "August invoices for Team, production, and tooling costs submitted; data confirmed as complete",
         "deliveredBy": "TBC"
       },
       {
-        "title": "Pending invoices exceeding payment terms",
-        "outcome": "Awaiting response on June and July invoices past 45-day terms; follow-up needed with stakeholders",
+        "title": "Outstanding invoice acknowledgements and payment delays",
+        "outcome": "Pending June and July invoices exceed payment terms; awaiting acknowledgement and clearance timeline alignment",
         "deliveredBy": "TBC"
       },
       {
-        "title": "Outstanding acknowledgement from team members",
-        "outcome": "No acknowledgement received on August invoices or calls request; outreach to be attempted before escalating",
+        "title": "July claims receipt timeline",
+        "outcome": "Receipt timing for July claims unresolved; pending response",
         "deliveredBy": "TBC"
       }
     ],
     "Grab": [
       {
         "title": "Kenneth's non-renewal notification timing",
-        "outcome": "Decided to inform Kenneth sooner than 1 Oct (coming Monday); HR team to confirm exact date and coordinate with client on leave/handover planning",
+        "outcome": "Inform Kenneth on coming Monday; HR to confirm exact date and coordinate leave/encashment planning with client",
         "deliveredBy": "TBC"
       },
       {
         "title": "Grab MSA renewal and extension terms",
-        "outcome": "Pending review of latest MSA and agreement with procurement; confirmation needed from team before proceeding with multi-year extension proposal",
+        "outcome": "Review latest MSA; confirm with procurement contacts whether to update termination notice and penalty terms; determine if 2-year extension is feasible",
         "deliveredBy": "TBC"
       }
     ],
     "Workday": [
       {
-        "title": "Adrian's check-in notes update",
-        "outcome": "Notes updated in sheet by 2 pm; update to be sent to Claudia",
+        "title": "Adrian's check-in notes update for client reporting",
+        "outcome": "Notes updated in sheet by 2 pm; ready for Claudia update",
         "deliveredBy": "TBC"
       }
     ],

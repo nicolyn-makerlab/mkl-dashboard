@@ -1,150 +1,126 @@
 {
-  "generatedAt": "2026-09-18T01:15:40.073Z",
+  "generatedAt": "2026-09-18T09:16:20.355Z",
   "topicsByCompany": {
     "STB": [
       {
-        "title": "Shared documentation and brand guidelines access",
-        "outcome": "Shared spreadsheet and Google Drive links with brand guidelines and marketing value prop (Slide 17)",
+        "title": "MVP mapping strategy for campaigns",
+        "outcome": "Agreed 90% of campaigns map back to MVP, with 10% exception for non-destination campaigns; TBC to manage client expectations if questioned",
+        "deliveredBy": "Marcus"
+      },
+      {
+        "title": "December 2026 creative scorecard KPI",
+        "outcome": "Set at ≥3.0/5 average client rating with ambition to hit 4.0 next year once playbook stabilizes",
         "deliveredBy": "TBC"
       },
       {
-        "title": "STB English language style preference",
-        "outcome": "Decided to follow British English with some Singlish influence; D (studio lead) checking guidelines with AI checker tool",
+        "title": "KPI sharing with client",
+        "outcome": "KPIs shared with client; team to map remaining individual KPIs over next two weeks while awaiting client feedback",
         "deliveredBy": "TBC"
       },
       {
-        "title": "KPI mapping to marketing value propositions",
-        "outcome": "Agreed that 90% of leisure campaigns map to MVPs; remaining 10% for non-destination-specific campaigns and trend-jacking; client expectations on 100% mapping to be managed internally",
+        "title": "Jacqueline's backfill and onboarding",
+        "outcome": "New hire to start 1 Oct with 2-3 day handover; Jacqueline's last day mid-October after final report; expedite candidate feedback needed",
         "deliveredBy": "TBC"
       },
       {
-        "title": "Caren's work-related individual KPI definition",
-        "outcome": "Pending conversation with Caren to clarify metric; similar to Emma but for static work only",
+        "title": "Leave coverage policy and rollout",
+        "outcome": "Align with Marcus and Nic this Friday; post for team review; roll out week of 21 Sept with comms from TX",
         "deliveredBy": "TBC"
       },
       {
-        "title": "Creative scorecard KPI for December 2026",
-        "outcome": "Set at 3.0/5 average client rating to allow time for oversight stabilization; ambition to hit 4.0 next year once playbook matures",
+        "title": "OOO coverage risk analysis review",
+        "outcome": "Box discussion with Marcus and Nic for Friday to review risk levels and coverage gaps, particularly for Caren and Judith",
         "deliveredBy": "TBC"
       },
       {
-        "title": "RFP costings for STB",
-        "outcome": "Sarah shared RFP costings and price schedule; last year calculation method unclear as documents only cover 2026-2028",
-        "deliveredBy": "TBC"
-      },
-      {
-        "title": "KPI sharing with client and mapping validation",
-        "outcome": "KPIs shared with client; awaiting their feedback while team ensures all KPIs are mapped over next two weeks; better understanding of Caren's work needed",
-        "deliveredBy": "TBC"
-      },
-      {
-        "title": "Jacqueline's backfill and hiring timeline",
-        "outcome": "Jacqueline met 5 talents pending her feedback; expedite requested; target start date 1 Oct with 2-3 day handover buffer; Jacqueline's last day mid-October after final report",
-        "deliveredBy": "TBC"
-      },
-      {
-        "title": "Team leave coverage and OOO planning",
-        "outcome": "Coverage plan developed by Rubi and Marcus; alignment meeting scheduled with Marcus and Nic for Friday to review OOO coverage doc; rollout week of 21 Sept",
-        "deliveredBy": "TBC"
-      },
-      {
-        "title": "Individual KPI tracking and team meeting preparation",
-        "outcome": "Meeting tomorrow afternoon at 3pm (F2F) with Marcus and Nicholas to align on individual KPIs before Wednesday update to STB",
+        "title": "STB update meeting with team",
+        "outcome": "F2F meeting tomorrow at 3pm with Marcus and Nic to align on individual KPIs before client update next Wednesday",
         "deliveredBy": "TBC"
       },
       {
         "title": "Tooling budget drawdown",
-        "outcome": "Sarah liaised on balance to be invoiced in STB's fiscal year 2",
+        "outcome": "Balance to be invoiced in STB's FY 2; Sarah liaised on details",
         "deliveredBy": "TBC"
       },
       {
-        "title": "Probationary check-ins for Marcus and Nic",
-        "outcome": "Client busy with planning; will revert within next week to confirm and detail meaningful feedback",
+        "title": "Dexter's consecutive leave approval",
+        "outcome": "Leave approved; reservist 10-20 Nov and personal leave 23 Nov-2 Dec; concern raised about coverage with Judith given community management workload",
         "deliveredBy": "TBC"
       },
       {
-        "title": "Quarterly reviews and probation checks alignment",
-        "outcome": "Considering merging quarterly reviews (scheduled 1 Oct) with probation confirmations",
+        "title": "Production budget allocation and wishlist",
+        "outcome": "Remaining OOP budget to be reworked; wishlist amount likely reduced to under 10k; will clarify items covered",
         "deliveredBy": "TBC"
       },
       {
-        "title": "Team's production wishlist budget approval",
-        "outcome": "Budget amount pending rework; likely to be brought under certain threshold; production claims include equipment, transport, tickets, props",
+        "title": "Time off in lieu accumulation during F1 season",
+        "outcome": "Escalated to Joshua and HR to discuss extending leave entitlement to Q1 2027 or cashing out due to BTS touring and F1 weekend work",
         "deliveredBy": "TBC"
       },
       {
-        "title": "Dexter's stacked leave during November-December",
-        "outcome": "Leave approved before extended leave policy discussions; reservist 10-20 Nov followed by leave 23 Nov-2 Dec; coverage concerns raised with Judith's capability; client notified weekly but no feedback given at time",
-        "deliveredBy": "TBC"
-      },
-      {
-        "title": "Resource visibility and leave communication",
-        "outcome": "Nicholas shares weekly leave updates every Tuesday with client; flagged that long leaves should be proactively raised during weekly WIP going forward",
-        "deliveredBy": "TBC"
-      },
-      {
-        "title": "Time off in lieu accumulation during F1 and BTS seasons",
-        "outcome": "Pending discussion with Joshua, Reema, and Rubi on extending leave entitlement to Q1 2027 or cashing out remaining days due to F1 weekend work and BTS December activation limiting time off",
-        "deliveredBy": "TBC"
-      },
-      {
-        "title": "Shaun hired as Jacqueline's replacement",
-        "outcome": "Proceeding with Shaun; liaising with Jacqueline and him on handover timelines; involving him in Sprout and September report with QBR involvement",
-        "deliveredBy": "TBC"
-      },
-      {
-        "title": "STB client update on planning status",
-        "outcome": "Client still in planning depths; shared document is heavy and team offered to walk through; Reshee away next Wednesday so review unlikely until return; coverage plan to be shared next week",
-        "deliveredBy": "TBC"
-      },
-      {
-        "title": "Production claims budget remaining balance",
-        "outcome": "Remaining budget available; team's average monthly claims noted; new wishlist would significantly reduce available operating budget for remaining period",
+        "title": "Leave and OIL discussion with HR",
+        "outcome": "Meeting scheduled for tomorrow at 12pm with Nico, Reema, and Rubi to discuss leave implications",
         "deliveredBy": "TBC"
       }
     ],
-    "Trade Desk": [],
+    "Trade Desk": [
+      {
+        "title": "Trade Desk renewal rates and billing currency",
+        "outcome": "Pending sense check with talents before sharing rates with client; holding response to be sent",
+        "deliveredBy": "TBC"
+      },
+      {
+        "title": "Client inquiry about contract end date",
+        "outcome": "To clarify with client why engagement is only through end of year",
+        "deliveredBy": "TBC"
+      }
+    ],
     "KFC": [
       {
-        "title": "August invoices submitted, awaiting acknowledgement",
-        "outcome": "No acknowledgement received from Jasmine or Ginger since last week; pending follow-up to confirm receipt",
+        "title": "August invoices submission and acknowledgement",
+        "outcome": "Invoices submitted but awaiting acknowledgement from client contacts; outreach to be attempted before escalation",
         "deliveredBy": "TBC"
       },
       {
         "title": "Overdue invoices from June and July",
-        "outcome": "Two invoices have exceeded 45-day payment terms; awaiting clearance timeline alignment and John to follow up on payment status",
+        "outcome": "Pending invoices exceed payment terms; seeking alignment on clearance timelines and acknowledgement from client",
         "deliveredBy": "TBC"
       },
       {
-        "title": "Follow-up on offered calls with client",
-        "outcome": "Pending confirmation of whether client is participating in offered calls; to be pursued through outreach attempts",
+        "title": "Calls and engagement follow-up",
+        "outcome": "Awaiting client response on offered calls; no acknowledgement received yet",
         "deliveredBy": "TBC"
       }
     ],
     "Grab": [
       {
-        "title": "Grab MSA renewal and extension terms",
-        "outcome": "Confirm with Reema and Joshua if MSA changes needed; consider updating termination notice period and penalty fee in MSA rather than individual SOWs during renewal",
+        "title": "MSA renewal and extension terms with Grab",
+        "outcome": "Pending confirmation from Reema and Joshua on MSA changes; considering updating MSA with recent agreement terms instead of individual SOWs",
         "deliveredBy": "TBC"
       },
       {
-        "title": "Talent Pia and Darwin post-client call status",
-        "outcome": "Client follow-up sent Friday with no response yet; annual leave reminders pending client confirmation on talent assignments",
+        "title": "Talent status updates for Pia and Darwin post-client call",
+        "outcome": "No updates received; follow-up email sent to client on Friday with no response yet",
         "deliveredBy": "TBC"
       },
       {
-        "title": "Ming Yi extended absence notification",
-        "outcome": "Confirmed Ming Yi away October to December 2026; Joy Ng to reach out and confirm next point of contact",
+        "title": "Ming Yi availability notice",
+        "outcome": "Confirmed Ming Yi unavailable October to December 2026; next POC to be confirmed",
         "deliveredBy": "TBC"
       },
       {
-        "title": "Grab POC change and probation scope delivery",
-        "outcome": "Sophie Li on sabbatical until December; Shraddha confirmed as interim POC for Kevin workstream; awaiting scope delivery responses",
+        "title": "Grab team POC change from Sophie to Shraddha",
+        "outcome": "Shraddha confirmed as interim POC for Kevin workstream; Sophie on sabbatical until December",
         "deliveredBy": "TBC"
       },
       {
-        "title": "GR marketing SG maternity leave coverage",
-        "outcome": "Amanda on maternity leave; Siew May and Sherene confirmed as POCs; update required in Caspio system",
+        "title": "GR Marketing SG team POC update",
+        "outcome": "Amanda on maternity leave; Siew May and Sherene confirmed as POCs; Caspio system to be updated",
+        "deliveredBy": "TBC"
+      },
+      {
+        "title": "Grab web build PMO role SOW clarification",
+        "outcome": "SOW on hold pending finalization of location details and JD creation; role in discussion",
         "deliveredBy": "TBC"
       }
     ],
